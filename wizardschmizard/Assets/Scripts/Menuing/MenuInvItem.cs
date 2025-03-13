@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class MenuInvItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] InvItem invItem;
-    [SerializeField] 
     InventoryManager invManager;
 
     private void Start()

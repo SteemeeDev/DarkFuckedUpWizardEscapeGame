@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
     {
         shownInvItem = item;
         if (shownItem != null) Destroy(shownItem);
-        shownItem = Instantiate(item.mesh, itemHoldPos);
+        shownItem = Instantiate(item.renderObject, itemHoldPos);
         shownItem.transform.localPosition = Vector3.zero;
     }
 
@@ -35,12 +35,9 @@ public class InventoryManager : MonoBehaviour
 
     void RotateObject()
     {
-        if (Input.GetMouseButton(0))
-        {
-            mPosDelta = Input.mousePosition - mPrevPos;
-            shownItem.transform.Rotate(itemCamera.transform.up, -Vector3.Dot(mPosDelta, itemCamera.transform.right) * rotateSensitivty, Space.World);
-            shownItem.transform.Rotate(itemCamera.transform.right, Vector3.Dot(mPosDelta, itemCamera.transform.up) * rotateSensitivty, Space.World);
-        }
+        mPosDelta = Input.mousePosition - mPrevPos;
+        shownItem.transform.Rotate(itemCamera.transform.up, -Vector3.Dot(mPosDelta, itemCamera.transform.right) * rotateSensitivty, Space.World);
+        shownItem.transform.Rotate(itemCamera.transform.right, Vector3.Dot(mPosDelta, itemCamera.transform.up) * rotateSensitivty, Space.World);
 
         mPrevPos = Input.mousePosition;
     }
@@ -54,16 +51,8 @@ public class InventoryManager : MonoBehaviour
 
         if (shownItem != null)
         {
-            if (!interactMode)
-            {
+            if (Input.GetMouseButton(1))
                 RotateObject();
-                interactModeText.text = "Off";
-            }
-            if (interactMode)
-            {
-                shownInvItem.interact();
-                interactModeText.text = "On";
-            }
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
