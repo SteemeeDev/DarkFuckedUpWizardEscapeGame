@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d5b5ad8f3efd8459df1f05eb48d11d, type: 3}
   m_Name: TestBox 3
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2924444076526323741, guid: 562d579670e30f945bd15c17344e24f1, type: 3}
+  mesh: {fileID: 2924444076526323741, guid: 562d579670e30f945bd15c17344e24f1, type: 3}
   sprite: {fileID: 21300000, guid: e57f59aa95819c546a6418ce645cf5db, type: 3}
