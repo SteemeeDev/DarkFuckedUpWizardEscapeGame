@@ -16,8 +16,9 @@ public class NewBehaviourScript : PhysItem
     public override void Click()
     {
         base.Click();
+        Debug.Log("Click on book!");
         if (a)
-            m_MeshRenderer.material.color = Color.white;
+            m_MeshRenderer.material.color = Color.black;
         else
         {
             m_MeshRenderer.material.color = startCol;
@@ -29,9 +30,11 @@ public class NewBehaviourScript : PhysItem
     public override void Update()
     {
         // Interact with subitems before the whole item
-        if (Physics.Raycast(itemCamera.ScreenPointToRay(Input.mousePosition), 100, itemPropertyLayer) && Input.GetMouseButtonDown(0))
+        RaycastHit hit;
+        if (Physics.Raycast(itemCamera.ScreenPointToRay(Input.mousePosition), out hit, 100, itemPropertyLayer) && Input.GetMouseButtonDown(0))
         {
-            Debug.Log("I FEEL SO SIGMA!");
+            Debug.Log("Hit subitem!");
+            hit.transform.GetComponent<BookCirclePiece>().Click();
         }
         else
         {

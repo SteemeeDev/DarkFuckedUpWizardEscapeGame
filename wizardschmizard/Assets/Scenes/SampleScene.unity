@@ -16374,7 +16374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259bb506f3ad7bb42b2bd57ddca68e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invItem: {fileID: 11400000, guid: fca4a811fa3624945a2c54e704f9dd93, type: 2}
+  invItem: {fileID: 11400000, guid: 50f7721f040c2c347864ea0cd958f5d5, type: 2}
 --- !u!114 &1333364290
 MonoBehaviour:
   m_ObjectHideFlags: 0
