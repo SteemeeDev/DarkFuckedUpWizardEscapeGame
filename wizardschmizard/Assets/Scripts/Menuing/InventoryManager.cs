@@ -49,16 +49,17 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) interactMode = !interactMode;
     
 
-        if (shownItem != null)
+        if (shownItem != null) 
         {
             if (Input.GetMouseButton(1))
                 RotateObject();
+            else mPrevPos = Input.mousePosition;
+        }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Destroy(shownItem);
-                items.SetActive(!items.activeSelf);
-            }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (shownItem != null) Destroy(shownItem);
+            items.SetActive(!items.activeSelf);
         }
 
 
