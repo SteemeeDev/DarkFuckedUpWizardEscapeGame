@@ -31,14 +31,11 @@ public class NewBehaviourScript : PhysItem
     {
         // Interact with subitems before the whole item
         RaycastHit hit;
+        
         if (Physics.Raycast(itemCamera.ScreenPointToRay(Input.mousePosition), out hit, 100, itemPropertyLayer) && Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Hit subitem!");
+            Debug.Log("Hit: " + hit.transform.name + " by " + this);
             hit.transform.GetComponent<BookCirclePiece>().Click();
-        }
-        else
-        {
-            base.Update();
         }
     }
 }
