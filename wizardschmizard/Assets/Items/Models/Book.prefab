@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3222476211958526907}
   - component: {fileID: 5361624162514353769}
   m_Layer: 7
-  m_Name: circ (5)
+  m_Name: Circ 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255555127087670701}
   serializedVersion: 2
-  m_LocalRotation: {x: 1.381723e-15, y: -2.7455512e-15, z: 0.7071068, w: -0.7071068}
+  m_LocalRotation: {x: 1.3817231e-15, y: -2.7455516e-15, z: 0.7071069, w: -0.70710677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01292655, y: 0.01292655, z: 0.053845815}
+  m_LocalScale: {x: 0.012926549, y: 0.012926549, z: 0.053845823}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6327540309292039887}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1980768159049054541}
   - component: {fileID: 1639380239242960387}
   m_Layer: 7
-  m_Name: circ (2)
+  m_Name: Circ 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3770682991462107452}
   - component: {fileID: 4812625305912592674}
   m_Layer: 7
-  m_Name: Prism (3)
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -485,6 +485,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 5
 --- !u!64 &4812625305912592674
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -522,7 +526,7 @@ GameObject:
   - component: {fileID: 8244995219702851755}
   - component: {fileID: 8918442873777296390}
   m_Layer: 7
-  m_Name: Prism (4)
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -805,7 +809,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -822,6 +826,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 2
 --- !u!64 &8918442873777296390
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -877,10 +885,10 @@ Transform:
   - {fileID: 2289723382101973508}
   - {fileID: 1980768159049054541}
   - {fileID: 2080537396977015479}
+  - {fileID: 3222476211958526907}
   - {fileID: 8800511606100675538}
   - {fileID: 6240738742609371874}
   - {fileID: 1849662815865858115}
-  - {fileID: 3222476211958526907}
   m_Father: {fileID: 4772910549318466661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3303103560009019894
@@ -898,7 +906,7 @@ GameObject:
   - component: {fileID: 696517547104503868}
   - component: {fileID: 4382454662340338986}
   m_Layer: 7
-  m_Name: Prism (5)
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1189,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1198,6 +1206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 6
 --- !u!64 &4382454662340338986
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1231,7 +1243,7 @@ GameObject:
   - component: {fileID: 522108238753416467}
   - component: {fileID: 5734021523818853655}
   m_Layer: 7
-  m_Name: circ
+  m_Name: Circ 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1316,7 +1328,7 @@ GameObject:
   - component: {fileID: 2289723382101973508}
   - component: {fileID: 8788258498436089268}
   m_Layer: 7
-  m_Name: circ (1)
+  m_Name: Circ 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1401,7 +1413,7 @@ GameObject:
   - component: {fileID: 1849662815865858115}
   - component: {fileID: 4263640475080424932}
   m_Layer: 7
-  m_Name: circ (7)
+  m_Name: Circ 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1490,7 +1502,7 @@ GameObject:
   - component: {fileID: 6219835289298293142}
   - component: {fileID: 4612544477892722113}
   m_Layer: 7
-  m_Name: Prism (2)
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1773,7 +1785,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 25
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1790,6 +1802,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 1
 --- !u!64 &4612544477892722113
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1827,7 +1843,7 @@ GameObject:
   - component: {fileID: 3075379155994223970}
   - component: {fileID: 1113131816767666865}
   m_Layer: 7
-  m_Name: Prism (6)
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2110,7 +2126,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2127,6 +2143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 3
 --- !u!64 &1113131816767666865
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2160,7 +2180,7 @@ GameObject:
   - component: {fileID: 8800511606100675538}
   - component: {fileID: 3695226580262780606}
   m_Layer: 7
-  m_Name: circ (4)
+  m_Name: Circ 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,7 +2265,7 @@ GameObject:
   - component: {fileID: 6240738742609371874}
   - component: {fileID: 1371209292472578242}
   m_Layer: 7
-  m_Name: circ (6)
+  m_Name: Circ 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2334,7 +2354,7 @@ GameObject:
   - component: {fileID: 7962176891199616274}
   - component: {fileID: 7972772027397792929}
   m_Layer: 7
-  m_Name: Prism
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2617,7 +2637,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2634,6 +2654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 4
 --- !u!64 &7972772027397792929
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2671,7 +2695,7 @@ GameObject:
   - component: {fileID: 7573394220020577416}
   - component: {fileID: 3173756998709287008}
   m_Layer: 7
-  m_Name: Prism (7)
+  m_Name: 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2954,7 +2978,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2971,6 +2995,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 7
 --- !u!64 &3173756998709287008
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3093,6 +3121,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCamera: {fileID: 0}
+  bookCirclePieces:
+  - {fileID: 6219835289298293142}
+  - {fileID: 3770682991462107452}
+  - {fileID: 8244995219702851755}
+  - {fileID: 696517547104503868}
+  - {fileID: 7573394220020577416}
+  - {fileID: 7962176891199616274}
+  - {fileID: 6733497229382587204}
+  - {fileID: 3075379155994223970}
 --- !u!114 &2379906280153356754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6906,7 +6943,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 22
+  m_VersionIndex: 25
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6944,7 +6981,7 @@ GameObject:
   - component: {fileID: 2080537396977015479}
   - component: {fileID: 864012558626596595}
   m_Layer: 7
-  m_Name: circ (3)
+  m_Name: Circ 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7033,7 +7070,7 @@ GameObject:
   - component: {fileID: 6733497229382587204}
   - component: {fileID: 4811073183134887370}
   m_Layer: 7
-  m_Name: Prism (1)
+  m_Name: 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7316,7 +7353,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7333,6 +7370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604f15d652c4e5c4993e180f97565603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
+  spriteRenderer: {fileID: 0}
+  startCol: {r: 0, g: 0, b: 0, a: 0}
+  index: 8
 --- !u!64 &4811073183134887370
 MeshCollider:
   m_ObjectHideFlags: 0

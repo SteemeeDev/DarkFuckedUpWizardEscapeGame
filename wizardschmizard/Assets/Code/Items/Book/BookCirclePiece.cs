@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Sits on layer 7, as an itemproperty
 public class BookCirclePiece : MonoBehaviour
 {
-    bool a = true;
-    SpriteRenderer spriteRenderer;
-    Color startCol;
+    public bool activated = false;
+    public SpriteRenderer spriteRenderer;
+    public Color startCol;
+
+    [Range(1, 8)] public int index; // Index for solving puzzle
     private void Start()
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
         startCol = spriteRenderer.color;
+        spriteRenderer.color = startCol * 0.5f;
     }
     public void Click()
     {
-        if (a)
-            spriteRenderer.color = Color.black;
-        else
-        {
+        if (activated)
+            spriteRenderer.color = startCol * 0.5f;
+        else {
             spriteRenderer.color = startCol;
         }
-        a = !a;
+        activated = !activated;
     }
 }

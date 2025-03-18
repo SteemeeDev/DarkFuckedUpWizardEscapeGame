@@ -3,39 +3,79 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-public class NewBehaviourScript : PhysItem
+public class Book : PhysItem
 {
-    bool a = false;
-    MeshRenderer m_MeshRenderer;
-    Color startCol;
-    private void Start()
-    {
-        m_MeshRenderer = GetComponent<MeshRenderer>();
-        startCol = m_MeshRenderer.material.color;
-    }
-    public override void Click()
-    {
-        base.Click();
-        Debug.Log("Click on book!");
-        if (a)
-            m_MeshRenderer.material.color = Color.black;
-        else
-        {
-            m_MeshRenderer.material.color = startCol;
-        }
-        a = !a;
-    }
 
+    int[] correctOrder = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    List<int> order = new List<int>();
+    [SerializeField] BookCirclePiece[] bookCirclePieces;
+
+    bool finishedOrder = false;
 
     public override void Update()
     {
+
+        // Check if pattern is correct
+        
+        if (order.Count >= correctOrder.Length && !finishedOrder)
+        {
+            bool correct = true;
+
+            for (int i = 0; i < order.Count; i++)
+            {
+                if (order[i] != correctOrder[i]) correct = false;
+            }
+
+            Debug.Log("CHOSEN ORDER: ");
+            foreach (int i in order)
+            {
+                Debug.Log(i);
+            }
+            Debug.Log("CORRECT ORDER: ");
+            foreach (int i in correctOrder)
+            {
+                Debug.Log(i);
+            }
+
+            if (!correct)
+            {
+                Debug.Log("WRONG!");
+                order.Clear();
+                foreach (var piece in bookCirclePieces)
+                {
+                    piece.activated = false;
+                    piece.spriteRenderer.color = piece.startCol * 0.5f;
+                }
+            }
+            else
+            {
+                Debug.Log("RIGHT!");
+                foreach (var piece in bookCirclePieces)
+                {
+                    piece.activated = true;
+                    piece.spriteRenderer.color *= Color.yellow;
+                }
+                finishedOrder = true;
+            }
+
+
+        }
         // Interact with subitems before the whole item
         RaycastHit hit;
         
-        if (Physics.Raycast(itemCamera.ScreenPointToRay(Input.mousePosition), out hit, 100, itemPropertyLayer) && Input.GetMouseButtonDown(0))
+        if (Physics.Raycast(itemCamera.ScreenPointToRay(Input.mousePosition), out hit, 100, itemPropertyLayer) && Input.GetMouseButtonDown(0) && !finishedOrder)
         {
-            Debug.Log("Hit: " + hit.transform.name + " by " + this);
-            hit.transform.GetComponent<BookCirclePiece>().Click();
+           // Debug.Log("Hit: " + hit.transform.name + " by " + this);
+            BookCirclePiece piece = hit.transform.GetComponent<BookCirclePiece>();
+            if (!piece.activated) order.Add(piece.index);
+            else order.Remove(piece.index);
+            
+            piece.Click();
+
+            Debug.Log("Piece index: " + piece.index);
         }
+
+
+
     }
 }

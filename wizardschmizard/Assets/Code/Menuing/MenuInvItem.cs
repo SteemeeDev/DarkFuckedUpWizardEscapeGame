@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 public class MenuInvItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    [SerializeField] InvItem invItem;
+    public InvItem invItem;
     InventoryManager invManager;
 
     private void Start()
     {
-        GetComponent<Image>().sprite = invItem.sprite;
+        if (invItem != null) GetComponent<Image>().sprite = invItem.sprite;
         invManager = GetComponentInParent<InventoryManager>();
     }
 

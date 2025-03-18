@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] Transform itemHoldPos;
-    [SerializeField] Transform itemInteractPos;
     [SerializeField] GameObject items;
     [SerializeField] Camera itemCamera;
-
-    public bool interactMode = false; 
-    [SerializeField] TMP_Text interactModeText;
-
+  
 
     GameObject shownItem;
     InvItem shownInvItem;
     
+    public void AddItem(InvItem item)
+    {
+        GameObject newItem = new GameObject(item.name);
+        newItem.transform.parent = items.transform;
+        newItem.AddComponent<Image>();
+        MenuInvItem menuInvItem = newItem.AddComponent<MenuInvItem>();
+        menuInvItem.invItem = item;
+    }
 
     public void ShowObject(InvItem item)
     {
@@ -45,10 +50,6 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.E)) interactMode = !interactMode;
-    
-
         if (shownItem != null) 
         {
             if (Input.GetMouseButton(1))
@@ -61,9 +62,5 @@ public class InventoryManager : MonoBehaviour
             if (shownItem != null) Destroy(shownItem);
             items.SetActive(!items.activeSelf);
         }
-
-
-
-
     }
 }
