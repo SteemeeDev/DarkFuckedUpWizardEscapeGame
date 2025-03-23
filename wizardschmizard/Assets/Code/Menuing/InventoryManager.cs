@@ -11,8 +11,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Camera itemCamera;
   
 
-    GameObject shownItem;
-    InvItem shownInvItem;
+    public GameObject shownItem;
+    public InvItem shownInvItem;
     
     public void AddItem(InvItem item)
     {
