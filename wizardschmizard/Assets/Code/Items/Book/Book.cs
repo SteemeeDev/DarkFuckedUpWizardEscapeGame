@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Book : PhysItem
 {
@@ -9,6 +11,9 @@ public class Book : PhysItem
     int[] correctOrder = { 1, 2, 3, 4, 5, 6, 7, 8 };
     List<int> order = new List<int>();
     [SerializeField] BookCirclePiece[] bookCirclePieces;
+    [SerializeField] GameObject bookMiddlePiece;
+
+    [SerializeField] Color correctEmissiveColor;
 
     bool finishedOrder = false;
 
@@ -43,17 +48,21 @@ public class Book : PhysItem
                 order.Clear();
                 foreach (var piece in bookCirclePieces)
                 {
-                    piece.activated = false;
-                    piece.skinnedMeshRenderer.material.color = piece.startCol * 0.5f;
+                    piece.Click();
                 }
             }
             else
             {
                 Debug.Log("RIGHT!");
+
+                // This might break in the future - if startcolor actually gets used
+                bookMiddlePiece.GetComponent<SkinnedMeshRenderer>().material.color *= correctEmissiveColor * 3;
+
                 foreach (var piece in bookCirclePieces)
                 {
                     piece.activated = true;
-                    piece.skinnedMeshRenderer.material.color *= Color.yellow;
+                    piece.skinnedMeshRenderer.material.color = piece.startCol * correctEmissiveColor * 3;
+                    piece.spriteRenderer.color = Color.black;
                 }
                 finishedOrder = true;
             }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Transform itemHoldPos;
     [SerializeField] GameObject items;
     [SerializeField] Camera itemCamera;
+
+    float scrollInput;
+    [SerializeField] float zoomIntensity;
+    [SerializeField] float maxZoom = 2f;
   
 
     public GameObject shownItem;
@@ -29,6 +35,7 @@ public class InventoryManager : MonoBehaviour
         if (shownItem != null) Destroy(shownItem);
         shownItem = Instantiate(item.renderObject, itemHoldPos);
         shownItem.transform.localPosition = Vector3.zero;
+        scrollInput = 0;
     }
 
 
@@ -48,6 +55,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
+
     void Update()
     {
         if (shownItem != null) 
@@ -55,6 +63,11 @@ public class InventoryManager : MonoBehaviour
             if (Input.GetMouseButton(1))
                 RotateObject();
             else mPrevPos = Input.mousePosition;
+
+            scrollInput += Input.GetAxis("Mouse ScrollWheel") * zoomIntensity;
+            scrollInput = math.clamp(scrollInput, -maxZoom, maxZoom);
+
+            shownItem.transform.position = itemHoldPos.position + itemCamera.transform.forward * scrollInput;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -62,5 +75,6 @@ public class InventoryManager : MonoBehaviour
             if (shownItem != null) Destroy(shownItem);
             items.SetActive(!items.activeSelf);
         }
+
     }
 }
