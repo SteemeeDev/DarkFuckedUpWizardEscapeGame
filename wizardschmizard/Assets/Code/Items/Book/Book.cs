@@ -44,7 +44,7 @@ public class Book : PhysItem
                 foreach (var piece in bookCirclePieces)
                 {
                     piece.activated = false;
-                    piece.spriteRenderer.color = piece.startCol * 0.5f;
+                    piece.skinnedMeshRenderer.material.color = piece.startCol * 0.5f;
                 }
             }
             else
@@ -53,7 +53,7 @@ public class Book : PhysItem
                 foreach (var piece in bookCirclePieces)
                 {
                     piece.activated = true;
-                    piece.spriteRenderer.color *= Color.yellow;
+                    piece.skinnedMeshRenderer.material.color *= Color.yellow;
                 }
                 finishedOrder = true;
             }

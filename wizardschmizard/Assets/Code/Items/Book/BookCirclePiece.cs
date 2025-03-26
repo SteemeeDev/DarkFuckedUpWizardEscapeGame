@@ -6,22 +6,22 @@ using UnityEngine;
 public class BookCirclePiece : MonoBehaviour
 {
     public bool activated = false;
-    public SpriteRenderer spriteRenderer;
+    public SkinnedMeshRenderer skinnedMeshRenderer;
     public Color startCol;
 
     [Range(1, 8)] public int index; // Index for solving puzzle
     private void Start()
     {
-        spriteRenderer = GetComponentInParent<SpriteRenderer>();
-        startCol = spriteRenderer.color;
-        spriteRenderer.color = startCol * 0.5f;
+        skinnedMeshRenderer = GetComponentInParent<SkinnedMeshRenderer>();
+        startCol = skinnedMeshRenderer.material.color;
+        skinnedMeshRenderer.material.color = startCol * 0.5f;
     }
     public void Click()
     {
         if (activated) 
-            spriteRenderer.color = startCol * 0.5f; 
+            skinnedMeshRenderer.material.color = startCol * 0.5f; 
         else
-            spriteRenderer.color = startCol;
+            skinnedMeshRenderer.material.color = startCol;
         
         activated = !activated;
     }
