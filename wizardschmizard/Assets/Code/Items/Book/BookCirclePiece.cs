@@ -18,11 +18,11 @@ public class BookCirclePiece : MonoBehaviour
     }
     public void Click()
     {
-        if (activated)
-            spriteRenderer.color = startCol * 0.5f;
-        else {
+        if (activated) 
+            spriteRenderer.color = startCol * 0.5f; 
+        else
             spriteRenderer.color = startCol;
-        }
+        
         activated = !activated;
     }
 }
