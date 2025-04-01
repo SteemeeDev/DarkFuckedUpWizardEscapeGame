@@ -2,24 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Unity.Burst.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
+using static UnityEngine.Rendering.DebugUI.Table;
 
-public class Book : PhysItem
+public class Book : MonoBehaviour
 {
-
     int[] correctOrder = { 1, 2, 3, 4, 5, 6, 7, 8 };
     List<int> order = new List<int>();
     [SerializeField] BookCirclePiece[] bookCirclePieces;
     [SerializeField] GameObject bookMiddlePiece;
-
     [SerializeField] Color correctEmissiveColor;
+    [SerializeField] InvItem openBookItem;
+    [SerializeField] InvItem closedBookItem;
 
     bool finishedOrder = false;
+    
+    public const int itemLayer = 1 << 6;
+    public const int itemPropertyLayer = 1 << 7;
 
-    public override void Update()
+    Camera itemCamera;
+    InventoryManager inventoryManager;
+    
+    Quaternion startRot;
+
+    private void Awake()
     {
+        itemCamera = GameObject.FindGameObjectWithTag("ItemCamera").GetComponent<Camera>();
+        inventoryManager = FindObjectOfType<InventoryManager>();
 
+        startRot = transform.rotation;
+    }
+
+    public void Update()
+    {
         // Check if pattern is correct
         
         if (order.Count >= correctOrder.Length && !finishedOrder)
@@ -51,8 +68,9 @@ public class Book : PhysItem
                     piece.Click();
                 }
             }
-            else
+            else if (finishedOrder != true)
             {
+                finishedOrder = true;
                 Debug.Log("RIGHT!");
 
                 // This might break in the future - if startcolor actually gets used
@@ -64,11 +82,15 @@ public class Book : PhysItem
                     piece.skinnedMeshRenderer.material.color = piece.startCol * correctEmissiveColor * 3;
                     piece.spriteRenderer.color = Color.black;
                 }
-                finishedOrder = true;
+
+                StartCoroutine(FinishTurn());
+
+
+                Debug.Log("Got through!");
             }
 
 
-        }
+        }   
         // Interact with subitems before the whole item
         RaycastHit hit;
         
@@ -83,8 +105,29 @@ public class Book : PhysItem
 
             Debug.Log("Piece index: " + piece.index);
         }
+    }
 
+    IEnumerator FinishTurn()
+    {
+        float elapsed = 0;
+        float time = 1f;
 
+        Quaternion currentRot = transform.rotation;
 
+        while (elapsed < time)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / time;
+
+            transform.rotation = Quaternion.Lerp(currentRot, startRot, t);
+            yield return null;
+        }
+        Quaternion rot = transform.rotation;
+
+        inventoryManager.RemoveItem(closedBookItem);
+        inventoryManager.AddItem(openBookItem);
+        inventoryManager.ShowObject(openBookItem);
+
+        inventoryManager.shownItem.transform.rotation = rot;
     }
 }

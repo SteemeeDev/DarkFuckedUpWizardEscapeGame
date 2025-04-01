@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] Transform itemHoldPos;
-    [SerializeField] GameObject items;
+    [SerializeField] GameObject itemParent;
     [SerializeField] Camera itemCamera;
 
     float scrollInput;
@@ -19,23 +19,43 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject shownItem;
     public InvItem shownInvItem;
+
+    public List<GameObject> items;
     
     public void AddItem(InvItem item)
     {
         GameObject newItem = new GameObject(item.name);
-        newItem.transform.parent = items.transform;
+        newItem.transform.parent = itemParent.transform;
         newItem.AddComponent<Image>();
         MenuInvItem menuInvItem = newItem.AddComponent<MenuInvItem>();
         menuInvItem.invItem = item;
+        items.Add(newItem);
+        newItem.GetComponent<RectTransform>().localScale = Vector3.one;
     }
 
+    public void RemoveItem(InvItem item)
+    {
+        foreach (GameObject newItem in items)
+        {
+            if (newItem.GetComponent<MenuInvItem>().invItem == item)
+            {
+                Destroy(shownItem);
+                items.Remove(newItem);
+                Destroy(newItem);
+                return;
+            }
+        }
+
+        Debug.Log("Item not found!");
+    }
     public void ShowObject(InvItem item)
     {
+        Debug.Log("Displaying item: " + item.name);
+
         shownInvItem = item;
         if (shownItem != null) Destroy(shownItem);
         shownItem = Instantiate(item.renderObject, itemHoldPos);
-        shownItem.transform.localPosition = Vector3.zero;
-        scrollInput = 0;
+        shownItem.transform.localPosition = Vector3.zero;   
     }
 
 
@@ -73,8 +93,9 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (shownItem != null) Destroy(shownItem);
-            items.SetActive(!items.activeSelf);
+            itemParent.SetActive(!itemParent.activeSelf);
         }
+
 
     }
 }

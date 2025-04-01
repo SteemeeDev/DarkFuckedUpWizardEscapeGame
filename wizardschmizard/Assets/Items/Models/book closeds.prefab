@@ -1727,6 +1727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6051155829728507565}
+  - component: {fileID: 3084003098298726761}
   m_Layer: 0
   m_Name: book closeds
   m_TagString: Untagged
@@ -1742,7 +1743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6391125218121755671}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2.87, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
@@ -1751,7 +1752,40 @@ Transform:
   - {fileID: 1809390456179906998}
   - {fileID: 7575387212904629254}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &3084003098298726761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391125218121755671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bc24d09dfe3a9f4fb8bb73778afd694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bookCirclePieces:
+  - {fileID: 5667912577044133309}
+  - {fileID: 8591573921942817482}
+  - {fileID: 3715459462883454883}
+  - {fileID: 1921052776438388183}
+  - {fileID: 2455874460341223961}
+  - {fileID: 646435435316361407}
+  - {fileID: 8572875137015376712}
+  - {fileID: 5867087683089189883}
+  bookMiddlePiece: {fileID: 4030008731619515502}
+  correctEmissiveColor: {r: 1, g: 0.7950881, b: 0.06132078, a: 0}
+  openBookItem: {fileID: 11400000, guid: 882bb1f627d49204d9eb23f1e995e47f, type: 2}
+  closedBookItem: {fileID: 11400000, guid: 50f7721f040c2c347864ea0cd958f5d5, type: 2}
+  finishedDirection:
+    value:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+  inventoryManager: {fileID: 0}
+  itemCamera: {fileID: 0}
 --- !u!1 &6786006535958318042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,12 +2000,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6916645964459483938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bc24d09dfe3a9f4fb8bb73778afd694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemCamera: {fileID: 0}
   bookCirclePieces:
   - {fileID: 5667912577044133309}
   - {fileID: 8591573921942817482}
@@ -1983,6 +2016,16 @@ MonoBehaviour:
   - {fileID: 5867087683089189883}
   bookMiddlePiece: {fileID: 4030008731619515502}
   correctEmissiveColor: {r: 1, g: 0.7950881, b: 0.06132078, a: 0}
+  openBookItem: {fileID: 11400000, guid: 882bb1f627d49204d9eb23f1e995e47f, type: 2}
+  closedBookItem: {fileID: 11400000, guid: 50f7721f040c2c347864ea0cd958f5d5, type: 2}
+  finishedDirection:
+    value:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+  inventoryManager: {fileID: 0}
+  itemCamera: {fileID: 0}
 --- !u!1 &7093126156469376075
 GameObject:
   m_ObjectHideFlags: 0

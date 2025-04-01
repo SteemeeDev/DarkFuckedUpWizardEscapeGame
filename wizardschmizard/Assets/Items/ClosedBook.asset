@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16d5b5ad8f3efd8459df1f05eb48d11d, type: 3}
-  m_Name: Book
+  m_Name: ClosedBook
   m_EditorClassIdentifier: 
   renderObject: {fileID: 6391125218121755671, guid: 9c2798be194c65e46b4d76cd2625d37e,
     type: 3}
