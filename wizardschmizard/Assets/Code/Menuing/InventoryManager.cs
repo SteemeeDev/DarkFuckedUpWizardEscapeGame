@@ -10,12 +10,12 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] Transform itemHoldPos;
     [SerializeField] GameObject itemParent;
+    [SerializeField] GameObject[] inventoryElements;
     [SerializeField] Camera itemCamera;
 
     float scrollInput;
     [SerializeField] float zoomIntensity;
     [SerializeField] float maxZoom = 2f;
-  
 
     public GameObject shownItem;
     public InvItem shownInvItem;
@@ -74,8 +74,6 @@ public class InventoryManager : MonoBehaviour
         mPrevPos = Input.mousePosition;
     }
 
-
-
     void Update()
     {
         if (shownItem != null) 
@@ -94,8 +92,10 @@ public class InventoryManager : MonoBehaviour
         {
             if (shownItem != null) Destroy(shownItem);
             itemParent.SetActive(!itemParent.activeSelf);
+            foreach (GameObject g in inventoryElements)
+            {
+                g.SetActive(!g.activeSelf);
+            }
         }
-
-
     }
 }
