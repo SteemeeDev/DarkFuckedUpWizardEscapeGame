@@ -70,8 +70,6 @@ public class InventoryManager : MonoBehaviour
         mPosDelta = Input.mousePosition - mPrevPos;
         shownItem.transform.Rotate(itemCamera.transform.up, -Vector3.Dot(mPosDelta, itemCamera.transform.right) * rotateSensitivty, Space.World);
         shownItem.transform.Rotate(itemCamera.transform.right, Vector3.Dot(mPosDelta, itemCamera.transform.up) * rotateSensitivty, Space.World);
-
-        mPrevPos = Input.mousePosition;
     }
 
     void Update()
@@ -80,7 +78,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (Input.GetMouseButton(1))
                 RotateObject();
-            else mPrevPos = Input.mousePosition;
+            mPrevPos = Input.mousePosition;
 
             scrollInput += Input.GetAxis("Mouse ScrollWheel") * zoomIntensity;
             scrollInput = math.clamp(scrollInput, -maxZoom, maxZoom);

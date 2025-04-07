@@ -221,7 +221,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 2
+  index: 4
 --- !u!65 &8659761087765158517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 7
+  index: 1
 --- !u!65 &6975171414622592364
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 1
+  index: 3
 --- !u!65 &6831523938090391028
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -935,7 +935,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 6
+  index: 8
 --- !u!65 &3445821648667678561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 5
+  index: 7
 --- !u!65 &5461026569086364986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 4
+  index: 6
 --- !u!65 &5430915660151585704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 3
+  index: 5
 --- !u!65 &6776710396059341619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   spriteRenderer: {fileID: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 8
+  index: 2
 --- !u!65 &3404841857877535799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1778,14 +1778,6 @@ MonoBehaviour:
   correctEmissiveColor: {r: 1, g: 0.7950881, b: 0.06132078, a: 0}
   openBookItem: {fileID: 11400000, guid: 882bb1f627d49204d9eb23f1e995e47f, type: 2}
   closedBookItem: {fileID: 11400000, guid: 50f7721f040c2c347864ea0cd958f5d5, type: 2}
-  finishedDirection:
-    value:
-      x: 0
-      y: 0
-      z: 0
-      w: 0
-  inventoryManager: {fileID: 0}
-  itemCamera: {fileID: 0}
 --- !u!1 &6786006535958318042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,14 +2010,6 @@ MonoBehaviour:
   correctEmissiveColor: {r: 1, g: 0.7950881, b: 0.06132078, a: 0}
   openBookItem: {fileID: 11400000, guid: 882bb1f627d49204d9eb23f1e995e47f, type: 2}
   closedBookItem: {fileID: 11400000, guid: 50f7721f040c2c347864ea0cd958f5d5, type: 2}
-  finishedDirection:
-    value:
-      x: 0
-      y: 0
-      z: 0
-      w: 0
-  inventoryManager: {fileID: 0}
-  itemCamera: {fileID: 0}
 --- !u!1 &7093126156469376075
 GameObject:
   m_ObjectHideFlags: 0

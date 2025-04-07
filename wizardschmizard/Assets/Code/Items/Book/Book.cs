@@ -48,6 +48,7 @@ public class Book : MonoBehaviour
                 if (order[i] != correctOrder[i]) correct = false;
             }
 
+            /*
             Debug.Log("CHOSEN ORDER: ");
             foreach (int i in order)
             {
@@ -58,6 +59,7 @@ public class Book : MonoBehaviour
             {
                 Debug.Log(i);
             }
+            */
 
             if (!correct)
             {
@@ -84,9 +86,6 @@ public class Book : MonoBehaviour
                 }
 
                 StartCoroutine(FinishTurn());
-
-
-                Debug.Log("Got through!");
             }
 
 

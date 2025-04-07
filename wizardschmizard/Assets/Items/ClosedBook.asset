@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderObject: {fileID: 6391125218121755671, guid: 9c2798be194c65e46b4d76cd2625d37e,
     type: 3}
-  sprite: {fileID: 21300000, guid: fbde85f2d3eb4614da7d5c6835e43c3d, type: 3}
+  sprite: {fileID: 21300000, guid: 6f6fafaf60e7fb44ea71d997adc4dfd1, type: 3}

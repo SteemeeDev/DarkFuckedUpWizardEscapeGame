@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 8417361359673230750, guid: ec9ada08fefae2f47b9f75708d15b0a9,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[0]
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -180,3 +180,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee159c94a5cac5448893a48488e3693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openTime: 1.2

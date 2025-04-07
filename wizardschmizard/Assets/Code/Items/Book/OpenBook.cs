@@ -5,17 +5,21 @@ using UnityEngine;
 public class OpenBook : MonoBehaviour
 {
     SkinnedMeshRenderer m_SkinnedMeshRenderer;
+    [SerializeField] float openTime = 1;
+
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
         m_SkinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
-
-        for (int i = 100; i > 0; i--)
+       
+        float elapsed = 0;
+        while (elapsed < openTime)
         {
-            i += (int)(Time.deltaTime % 0.005f);
-            m_SkinnedMeshRenderer.SetBlendShapeWeight(0, i);
-            yield return new WaitForSeconds(0.005f);
-        }
-        
+            elapsed += Time.deltaTime;
+            float t = elapsed / openTime; 
+            m_SkinnedMeshRenderer.SetBlendShapeWeight(0, (1.0f-t)*100.0f);
+            yield return null;
+        }   
     }
 }
