@@ -20,17 +20,13 @@ public class CameraController : MonoBehaviour
 
     public void Turn(bool right)
     {
-        Debug.Log("Attempting turn..." + " \nTurnbuffer: " + timeSinceLastTurn);
         if (timeSinceLastTurn < turnBufferTime) return;
         if (lookingDown) return;
 
         timeSinceLastTurn = 0;
 
-        Debug.Log("Turn initiated!");
-
         if (!right)
         {
-            Debug.Log("Looking Left!");
             lookIndex--;
             
             if (lookIndex < 0)
@@ -40,7 +36,6 @@ public class CameraController : MonoBehaviour
         }
         else if (right)
         {
-            Debug.Log("Looking Right!");
             lookIndex++;
 
             if (lookIndex >= lookObjects.Length)
@@ -53,21 +48,16 @@ public class CameraController : MonoBehaviour
 
     public void Turn(bool left, bool down)
     {
-        Debug.Log("Attempting turn..." + " \nTurnbuffer: " + timeSinceLastTurn);
         if (timeSinceLastTurn < turnBufferTime) return;
 
         timeSinceLastTurn = 0;
 
-        Debug.Log("Turn initiated!");
-
         if (down)
         {
-            Debug.Log("Looking down!");
             lookingDown = true;
         }
         else if (!down)
         {
-            Debug.Log("Looking Up!");
             lookingDown = false;
         }
     }

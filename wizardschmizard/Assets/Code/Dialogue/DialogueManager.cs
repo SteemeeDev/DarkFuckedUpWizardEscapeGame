@@ -10,7 +10,6 @@ public class DialogueManager : MonoBehaviour
 
     Image textBox;
 
-    [SerializeField] DialogueObj[] allDialogue;
     [SerializeField] TMP_Text dialogueText;
 
     AudioSource audioSource;
@@ -22,24 +21,16 @@ public class DialogueManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();  
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            StopAllCoroutines();
-            StartCoroutine(ReadDialogue(0));
-        }
-    }
 
-    public IEnumerator ReadDialogue(int index)
+    public IEnumerator ReadDialogue(string dialogueObj)
     {
         textBox.enabled = true;
         dialogueText.enabled = true;
         dialogueText.text = "";
-        for (int i = 0; i < allDialogue[index].Dialogue.Length; i++)
+        for (int i = 0; i < dialogueObj.Length; i++)
         {
             bool playAudio = false;
-            switch (char.ToLower(allDialogue[index].Dialogue[i]))
+            switch (char.ToLower(dialogueObj[i]))
             {
                 case 'a':
                     playAudio = true;
@@ -56,6 +47,9 @@ public class DialogueManager : MonoBehaviour
                 case 'u':
                     playAudio = true;
                     break;
+                case 'y':
+                    playAudio = true;
+                    break;
             }
 
             if (playAudio)
@@ -65,7 +59,7 @@ public class DialogueManager : MonoBehaviour
                 audioSource.PlayOneShot(audios[0]);
             }
 
-            dialogueText.text += allDialogue[index].Dialogue[i];
+            dialogueText.text += dialogueObj[i];
             yield return new WaitForSeconds(1.0f/textSpeed);
         }
 

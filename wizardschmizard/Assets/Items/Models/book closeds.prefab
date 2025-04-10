@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 7125586159699465544}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 4
 --- !u!65 &8659761087765158517
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1808250056357330812}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 1
 --- !u!65 &6975171414622592364
@@ -723,7 +723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 6586741349212731075}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 3
 --- !u!65 &6831523938090391028
@@ -933,7 +933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1803390892108577138}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 8
 --- !u!65 &3445821648667678561
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 3377980914119785860}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 7
 --- !u!65 &5461026569086364986
@@ -1304,7 +1304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 5258605673850991531}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 6
 --- !u!65 &5430915660151585704
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 977660200500526782}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 5
 --- !u!65 &6776710396059341619
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   skinnedMeshRenderer: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 8986986420209358051}
   startCol: {r: 0, g: 0, b: 0, a: 0}
   index: 2
 --- !u!65 &3404841857877535799
@@ -1765,6 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc24d09dfe3a9f4fb8bb73778afd694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  order: 
   bookCirclePieces:
   - {fileID: 5667912577044133309}
   - {fileID: 8591573921942817482}
@@ -1997,6 +1998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc24d09dfe3a9f4fb8bb73778afd694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  order: 
   bookCirclePieces:
   - {fileID: 5667912577044133309}
   - {fileID: 8591573921942817482}

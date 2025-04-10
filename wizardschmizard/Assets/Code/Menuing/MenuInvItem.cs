@@ -27,6 +27,7 @@ public class MenuInvItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerClick(PointerEventData eventData)
     {
         if (invManager.shownItem != null && invManager.shownInvItem == invItem) {
+            invManager.saveManager.SaveLastItemState(invManager.shownItem);
             Destroy(invManager.shownItem);
         }
         else invManager.ShowObject(invItem);

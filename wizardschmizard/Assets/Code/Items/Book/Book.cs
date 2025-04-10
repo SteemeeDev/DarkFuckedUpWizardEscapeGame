@@ -10,8 +10,8 @@ using static UnityEngine.Rendering.DebugUI.Table;
 public class Book : MonoBehaviour
 {
     int[] correctOrder = { 1, 2, 3, 4, 5, 6, 7, 8 };
-    List<int> order = new List<int>();
-    [SerializeField] BookCirclePiece[] bookCirclePieces;
+    public List<int> order = new List<int>();
+    [SerializeField] public BookCirclePiece[] bookCirclePieces;
     [SerializeField] GameObject bookMiddlePiece;
     [SerializeField] Color correctEmissiveColor;
     [SerializeField] InvItem openBookItem;

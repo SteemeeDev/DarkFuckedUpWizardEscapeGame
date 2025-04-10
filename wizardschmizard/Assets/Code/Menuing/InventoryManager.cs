@@ -21,7 +21,9 @@ public class InventoryManager : MonoBehaviour
     public InvItem shownInvItem;
 
     public List<GameObject> items;
-    
+
+    public ItemSaveStateManager saveManager;
+
     public void AddItem(InvItem item)
     {
         GameObject newItem = new GameObject(item.name);
@@ -50,12 +52,32 @@ public class InventoryManager : MonoBehaviour
     }
     public void ShowObject(InvItem item)
     {
+       
         Debug.Log("Displaying item: " + item.name);
 
         shownInvItem = item;
-        if (shownItem != null) Destroy(shownItem);
+
+        if (shownItem != null)
+        {
+            saveManager.SaveLastItemState(shownItem);
+            Destroy(shownItem);
+        }
+        
         shownItem = Instantiate(item.renderObject, itemHoldPos);
-        shownItem.transform.localPosition = Vector3.zero;   
+        saveManager.LoadLastItemState(shownItem);
+
+
+
+        if (shownItem.layer == 0)
+        {
+            shownItem.layer = 6;
+            for (int i = 0; i < shownItem.transform.childCount; i++)
+            {
+                shownItem.transform.GetChild(i).gameObject.layer = 6;
+            }
+        }
+
+        
     }
 
 
