@@ -86,7 +86,7 @@ PrefabInstance:
     - target: {fileID: -3887185075125053422, guid: a72d8d6b949b62048a5c7d2df9acacbd,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[0]
-      value: 100
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a72d8d6b949b62048a5c7d2df9acacbd,
         type: 3}

@@ -8,7 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] float textSpeed = 20;
 
-    Image textBox;
+    [SerializeField] GameObject[] textBoxElements;
 
     [SerializeField] TMP_Text dialogueText;
 
@@ -17,14 +17,17 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        textBox = GetComponent<Image>();
         audioSource = GetComponent<AudioSource>();  
     }
 
 
     public IEnumerator ReadDialogue(string dialogueObj)
     {
-        textBox.enabled = true;
+        foreach (GameObject element in textBoxElements)
+        {
+            element.SetActive(true);
+        }
+
         dialogueText.enabled = true;
         dialogueText.text = "";
         for (int i = 0; i < dialogueObj.Length; i++)
@@ -65,7 +68,10 @@ public class DialogueManager : MonoBehaviour
 
         yield return new WaitForSeconds(5);
 
-        textBox.enabled = false;
+        foreach (GameObject element in textBoxElements)
+        {
+            element.SetActive(true);
+        }
         dialogueText.enabled = false;
     }
 }
