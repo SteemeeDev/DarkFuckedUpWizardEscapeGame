@@ -39,7 +39,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Density: 5
-    - _Magnitude: 0.39
+    - _Magnitude: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 2.26
