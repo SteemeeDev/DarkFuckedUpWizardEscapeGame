@@ -17,7 +17,7 @@ public class LineShake : MonoBehaviour
     public List<Vector3> points;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (points.Count > 0)
         {
@@ -27,9 +27,9 @@ public class LineShake : MonoBehaviour
             {
                 Vector3 randomPos = points[i] +
                     new Vector3(
-                        Random.Range(-shakeMagnitude, shakeMagnitude) * points[i].x,
-                        Random.Range(-shakeMagnitude, shakeMagnitude) * points[i].y,
-                        Random.Range(-shakeMagnitude, shakeMagnitude) * points[i].z
+                        Random.Range(-shakeMagnitude, shakeMagnitude),
+                        Random.Range(-shakeMagnitude, shakeMagnitude),
+                        Random.Range(-shakeMagnitude, shakeMagnitude)
                     );
 
                 lineRenderer.SetPosition(i, randomPos);

@@ -13,22 +13,21 @@ public class DrawOnSphere : MonoBehaviour
 {
     Camera itemCam;
     [SerializeField] LineRenderer[] lineRenderers;
-    [SerializeField] Transform[] cylinders;
     [SerializeField] float minPointDistance;
+    [SerializeField] float maxPointDistance;
     [SerializeField] float minOverlapDistance;
-    [SerializeField] float maxMouseMoveDistance;
 
+    [SerializeField] LineEnd[] lineEnds;
+
+    const int itemLayer = 1 << 6;         // Circle layer
+    const int itemPropertyLayer = 1 << 7; // LineEnd segments
 
     Transform currentCyl;
 
 
     private void Awake()
     {
-        foreach (Transform cyl in cylinders)
-        {
-            cyl.localPosition = Random.onUnitSphere / 2;
-            cyl.up = (transform.position - cyl.position).normalized;
-        }
+        lineEnds = transform.GetComponentsInChildren<LineEnd>();
 
         itemCam = GameObject.FindGameObjectWithTag("ItemCamera").GetComponent<Camera>();
     }
@@ -36,16 +35,26 @@ public class DrawOnSphere : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-            if (Physics.Raycast(itemCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+            if (Physics.Raycast(itemCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 999))
             {
-                for (int i = 0; i < cylinders.Length; i++)
+                LineEnd hitLineEnd = hit.transform.GetComponent<LineEnd>();
+                if (hitLineEnd != null)
                 {
-                    if (cylinders[i] == hit.transform)
+                    StartCoroutine(drawLine(lineRenderers[(int)hitLineEnd._lineColor]));
+
+                    foreach (LineEnd lineEnd in lineEnds)
                     {
-                        StartCoroutine(drawLine(lineRenderers[i]));
+                        if (lineEnd == hitLineEnd)
+                        {
+                            lineEnd.connected = true;
+                            continue;
+                        }
+                        if (lineEnd._lineColor == hitLineEnd._lineColor)
+                        {
+                            lineEnd.connected = false;
+                        }
                     }
                 }
-     
             }
 
         }
@@ -55,17 +64,14 @@ public class DrawOnSphere : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            foreach (Transform cyl in cylinders)
-            {
-                cyl.localPosition = Random.onUnitSphere / 2;
-                cyl.up = (transform.position - cyl.position).normalized;
-            }
+            Debug.Log($"Finished puzzle: {PuzzleFinished()}");
 
+            /*
             foreach (LineRenderer lineRenderer in lineRenderers)
             {
                 lineRenderer.GetComponent<LineShake>().points.Clear();
                 lineRenderer.positionCount = 0;
-            }
+            }*/
         }
     }
 
@@ -73,10 +79,6 @@ public class DrawOnSphere : MonoBehaviour
     {
         LineShake lineShake = lr.transform.GetComponent<LineShake>();
         float pointMoveDelta = Mathf.Infinity;
-
-      
-        Vector3 prevMousePos = Input.mousePosition;
-        float mouseDelta;
 
         bool firstRun = true;
 
@@ -97,39 +99,49 @@ public class DrawOnSphere : MonoBehaviour
                 }
             }
             
-            mouseDelta = (Input.mousePosition - prevMousePos).magnitude;
-
-            // Place points between if mouse moves too fast
-            if (mouseDelta > maxMouseMoveDistance)
+            if (hit.transform.GetComponent<LineEnd>() != null)
             {
-                Debug.LogWarning("Mouse moved too fast!");
-
-                Vector3 mouseLerpPos;
-
-                float lerpPoints = (int)(mouseDelta * 0.25f);
-                //Debug.Log(lerpPoints);
-
-                for (int i = 0; i <= lerpPoints; i++)
-                {
-                    mouseLerpPos = Vector2.Lerp(prevMousePos, Input.mousePosition, (float)i / lerpPoints);
-                    Debug.DrawRay(itemCam.ScreenPointToRay(mouseLerpPos).origin, itemCam.ScreenPointToRay(mouseLerpPos).direction, Color.blue, 6);
-                    if (Physics.Raycast(itemCam.ScreenPointToRay(mouseLerpPos), out RaycastHit _hit)){
-                        lr.positionCount = lineShake.points.Count;
-                        lineShake.points.Add(transform.InverseTransformPoint(_hit.point + _hit.normal * 0.01f));
-
-                        CheckOverlap((_hit.point + _hit.normal * 0.01f), lr);
-                    }
-
-                }
+                hit.transform.GetComponent<LineEnd>().connected = true;
             }
 
-            prevMousePos = Input.mousePosition;
             // Check if point has moved enough
             if (pointMoveDelta > minPointDistance)
             {
-                lr.positionCount = lineShake.points.Count;
-                lineShake.points.Add(transform.InverseTransformPoint(hit.point + hit.normal * 0.01f));
-                CheckOverlap((hit.point + hit.normal * 0.01f), lr);
+               // Debug.Log("PointMoveDelta: " + pointMoveDelta);
+                if(pointMoveDelta > maxPointDistance && lineShake.points.Count > 0)
+                {
+                    Debug.LogWarning("Mouse moved too fast!");
+
+                    Vector2 prevPointScreenPos = itemCam.WorldToScreenPoint(transform.TransformPoint(lineShake.points.ElementAt(lineShake.points.Count - 1)));
+                    Vector2 currrentPointScreenPos = itemCam.WorldToScreenPoint(hit.point + hit.normal * 0.01f);
+
+                    Vector2 mouseLerpPos;
+
+                    float lerpPoints = (int)(pointMoveDelta / (minPointDistance));
+                    Debug.Log($"Placing {lerpPoints} points");
+
+                    for (int i = 0; i <= lerpPoints; i++)
+                    {
+                        mouseLerpPos = Vector2.Lerp(prevPointScreenPos, currrentPointScreenPos, (float)i / lerpPoints);
+
+                        Debug.DrawRay(itemCam.ScreenPointToRay(mouseLerpPos).origin, itemCam.ScreenPointToRay(mouseLerpPos).direction, Color.blue, 20);
+                        if (Physics.Raycast(itemCam.ScreenPointToRay(mouseLerpPos), out RaycastHit _hit))
+                        {
+                            lr.positionCount = lineShake.points.Count;
+                            lineShake.points.Add(transform.InverseTransformPoint(_hit.point + _hit.normal * 0.01f));
+
+                            CheckOverlap((_hit.point + _hit.normal * 0.01f), lr);
+                        }
+
+                    }
+                }
+                else
+                {
+                    lr.positionCount = lineShake.points.Count;
+                    lineShake.points.Add(transform.InverseTransformPoint(hit.point + hit.normal * 0.01f));
+                    CheckOverlap((hit.point + hit.normal * 0.01f), lr);
+                }
+
             }
 
             yield return null;
@@ -152,11 +164,11 @@ public class DrawOnSphere : MonoBehaviour
         return distance;
     }
 
-    
     void CheckOverlap(Vector3 point, LineRenderer lr)
     {
-        foreach (LineRenderer _lr in lineRenderers)
+        for (int i = 0; i < lineRenderers.Length; i++)
         {
+            LineRenderer _lr = lineRenderers[i];
             if (_lr == lr ) continue;
             
 
@@ -170,7 +182,24 @@ public class DrawOnSphere : MonoBehaviour
             {
                 _lr.GetComponent<LineShake>().points.Clear();
                 _lr.positionCount = 0;
+
+                foreach (LineEnd lineEnd in lineEnds)
+                {
+                    if ((int)lineEnd._lineColor == i)
+                    {
+                        lineEnd.connected = false;
+                    }
+                }
             }
         }
+    }
+
+    bool PuzzleFinished()
+    {
+        foreach (LineEnd lineEnd in lineEnds)
+        {
+            if (!lineEnd.connected) return false;
+        }
+        return true;
     }
 }

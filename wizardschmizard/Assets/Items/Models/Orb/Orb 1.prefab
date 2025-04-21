@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1190004717122576608
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1588350836821044996}
-  m_Layer: 6
-  m_Name: Purple
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1588350836821044996
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190004717122576608}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5387149965924760698}
-  m_Father: {fileID: 5913174291224594413}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881545113203295888
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +39,7 @@ Transform:
   - {fileID: 3405657361513195882}
   - {fileID: 3672881713401178626}
   - {fileID: 8583615612473193253}
-  - {fileID: 1588350836821044996}
+  - {fileID: 4232469284492765046}
   - {fileID: 5215999039302005871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,13 +131,10 @@ MonoBehaviour:
   - {fileID: 7966141730608231606}
   - {fileID: 3995778180129545880}
   - {fileID: 7124622444084810335}
-  cylinders:
-  - {fileID: 7578284080877112768}
-  - {fileID: 2674721483391318088}
-  - {fileID: 5387149965924760698}
-  minPointDistance: 0.02
-  minOverlapDistance: 0.01
-  maxMouseMoveDistance: 20
+  minPointDistance: 0.015
+  maxPointDistance: 0.06
+  minOverlapDistance: 0.017
+  lineEnds: []
 --- !u!1 &3325655749446729718
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8583615612473193253
 Transform:
   m_ObjectHideFlags: 0
@@ -350,9 +315,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawOnSphere: {fileID: 2649956481690074099}
-  shakeMagnitude: 0.02
+  shakeMagnitude: 0.01
   points: []
---- !u!1 &4264058416212698305
+--- !u!1 &4282719601441355371
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,47 +325,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5387149965924760698}
-  - component: {fileID: 6491858148583417976}
-  - component: {fileID: 7825354149545926630}
-  - component: {fileID: 1302944188231503623}
-  m_Layer: 6
-  m_Name: PurpleCylinder
+  - component: {fileID: 4098518931938072573}
+  - component: {fileID: 3673141064571569804}
+  - component: {fileID: 8432031970630264581}
+  - component: {fileID: 8561980029622288137}
+  - component: {fileID: 7965072504041886374}
+  m_Layer: 7
+  m_Name: GreenCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5387149965924760698
+--- !u!4 &4098518931938072573
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264058416212698305}
+  m_GameObject: {fileID: 4282719601441355371}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 0.10000001, y: 0.003, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1588350836821044996}
+  m_Father: {fileID: 4232469284492765046}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!33 &6491858148583417976
+--- !u!33 &3673141064571569804
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264058416212698305}
+  m_GameObject: {fileID: 4282719601441355371}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7825354149545926630
+--- !u!23 &8432031970630264581
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264058416212698305}
+  m_GameObject: {fileID: 4282719601441355371}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -414,7 +380,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 982f503513f85ee439dac8832651f81c, type: 2}
+  - {fileID: 2100000, guid: 8f5e298d3ac81394ebfd121b25718d89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -436,13 +402,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1302944188231503623
+--- !u!64 &8561980029622288137
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264058416212698305}
+  m_GameObject: {fileID: 4282719601441355371}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -458,6 +424,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7965072504041886374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282719601441355371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0947d17bbd1f442b262b649ca89287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lineColor: 1
+  connected: 0
 --- !u!1 &4841023497300440569
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +483,7 @@ GameObject:
   - component: {fileID: 1808348690828547811}
   - component: {fileID: 809467462880153889}
   - component: {fileID: 3672802623492840013}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BlueCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,6 +589,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0947d17bbd1f442b262b649ca89287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lineColor: 0
+  connected: 0
+--- !u!1 &5352022919848594459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4232469284492765046}
+  m_Layer: 6
+  m_Name: Green (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4232469284492765046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5352022919848594459}
+  serializedVersion: 2
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4098518931938072573}
+  m_Father: {fileID: 5913174291224594413}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!1 &5835579445072676301
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +635,8 @@ GameObject:
   - component: {fileID: 1756359177688409910}
   - component: {fileID: 871063754267079155}
   - component: {fileID: 8596661029542728864}
-  m_Layer: 6
+  - component: {fileID: 4350634531532815695}
+  m_Layer: 7
   m_Name: BlueCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,6 +730,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4350634531532815695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835579445072676301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0947d17bbd1f442b262b649ca89287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lineColor: 0
+  connected: 0
 --- !u!1 &6273061538620745203
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +788,8 @@ GameObject:
   - component: {fileID: 4794178602377175920}
   - component: {fileID: 1846451514659567069}
   - component: {fileID: 2453258435821776222}
-  m_Layer: 6
+  - component: {fileID: 4767236483714920595}
+  m_Layer: 7
   m_Name: GreenCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,6 +883,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4767236483714920595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485570053427249505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0947d17bbd1f442b262b649ca89287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lineColor: 1
+  connected: 0
 --- !u!1 &7394191855213900805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawOnSphere: {fileID: 2649956481690074099}
-  shakeMagnitude: 0.02
+  shakeMagnitude: 0.01
   points: []
 --- !u!1 &7897428949859095478
 GameObject:
@@ -1151,7 +1195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawOnSphere: {fileID: 2649956481690074099}
-  shakeMagnitude: 0.02
+  shakeMagnitude: 0.01
   points: []
 --- !u!1 &8212269622867916993
 GameObject:
