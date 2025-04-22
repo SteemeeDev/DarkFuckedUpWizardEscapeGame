@@ -8,6 +8,7 @@ public class LineShake : MonoBehaviour
     LineRenderer lineRenderer;
     [SerializeField] DrawOnSphere DrawOnSphere;
     [SerializeField] float shakeMagnitude = 0.015f;
+    public LineEnd.LineColor lineColor;
 
     private void Start()
     {

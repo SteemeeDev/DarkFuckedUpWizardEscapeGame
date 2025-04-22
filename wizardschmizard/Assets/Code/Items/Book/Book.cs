@@ -75,14 +75,12 @@ public class Book : MonoBehaviour
                 finishedOrder = true;
                 Debug.Log("RIGHT!");
 
-                // This might break in the future - if startcolor actually gets used
-                bookMiddlePiece.GetComponent<SkinnedMeshRenderer>().material.color *= correctEmissiveColor * 3;
+               // bookMiddlePiece.GetComponent<SkinnedMeshRenderer>().material.color *= 1.5f;
 
                 foreach (var piece in bookCirclePieces)
                 {
                     piece.activated = true;
-                    piece.skinnedMeshRenderer.material.color = piece.startCol * correctEmissiveColor * 3;
-                    piece.spriteRenderer.color = Color.black;
+                   // piece.skinnedMeshRenderer.material.color *= 1.5f;
                 }
 
                 StartCoroutine(FinishTurn());

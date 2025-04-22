@@ -24,12 +24,18 @@ public class DrawOnSphere : MonoBehaviour
 
     Transform currentCyl;
 
+    [Space(10)]
+    InventoryManager inventoryManager;
+    [SerializeField] InvItem NextItem;
+
 
     private void Awake()
     {
         lineEnds = transform.GetComponentsInChildren<LineEnd>();
 
         itemCam = GameObject.FindGameObjectWithTag("ItemCamera").GetComponent<Camera>();
+
+        inventoryManager = FindObjectOfType<InventoryManager>();
     }
 
     private void Update()
@@ -40,7 +46,7 @@ public class DrawOnSphere : MonoBehaviour
                 LineEnd hitLineEnd = hit.transform.GetComponent<LineEnd>();
                 if (hitLineEnd != null)
                 {
-                    StartCoroutine(drawLine(lineRenderers[(int)hitLineEnd._lineColor]));
+                    StartCoroutine(DrawLine(lineRenderers[(int)hitLineEnd._lineColor]));
 
                     foreach (LineEnd lineEnd in lineEnds)
                     {
@@ -64,6 +70,12 @@ public class DrawOnSphere : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (PuzzleFinished())
+            {
+                inventoryManager.RemoveItem(inventoryManager.shownInvItem);
+                inventoryManager.AddItem(NextItem);
+                inventoryManager.ShowObject(NextItem);
+            }
             Debug.Log($"Finished puzzle: {PuzzleFinished()}");
 
             /*
@@ -75,9 +87,12 @@ public class DrawOnSphere : MonoBehaviour
         }
     }
 
-    IEnumerator drawLine(LineRenderer lr)
+    IEnumerator DrawLine(LineRenderer lr)
     {
+        // Componont that handles storing the position data
         LineShake lineShake = lr.transform.GetComponent<LineShake>();
+
+        // How much the point we are trying to place has moved
         float pointMoveDelta = Mathf.Infinity;
 
         bool firstRun = true;
@@ -99,15 +114,25 @@ public class DrawOnSphere : MonoBehaviour
                 }
             }
             
-            if (hit.transform.GetComponent<LineEnd>() != null)
+            LineEnd _lineEnd = hit.transform.GetComponent<LineEnd>();
+            if (_lineEnd != null)
             {
-                hit.transform.GetComponent<LineEnd>().connected = true;
+                if (_lineEnd._lineColor == lineShake.lineColor)
+                {
+                    hit.transform.GetComponent<LineEnd>().connected = true;
+                }
+                else
+                {
+                    StopAllCoroutines();
+                }
             }
 
             // Check if point has moved enough
             if (pointMoveDelta > minPointDistance)
             {
-               // Debug.Log("PointMoveDelta: " + pointMoveDelta);
+                // Debug.Log("PointMoveDelta: " + pointMoveDelta);
+
+                // TODO: Consider if we should always run this top statement
                 if(pointMoveDelta > maxPointDistance && lineShake.points.Count > 0)
                 {
                     Debug.LogWarning("Mouse moved too fast!");
@@ -180,16 +205,36 @@ public class DrawOnSphere : MonoBehaviour
 
             if (closestPoint < minOverlapDistance)
             {
-                _lr.GetComponent<LineShake>().points.Clear();
-                _lr.positionCount = 0;
-
-                foreach (LineEnd lineEnd in lineEnds)
+                if (_lr.GetComponent<LineShake>().lineColor == LineEnd.LineColor.Gray)
                 {
-                    if ((int)lineEnd._lineColor == i)
+                    lr.GetComponent<LineShake>().points.Clear();
+                    lr.positionCount = 0;
+
+                    foreach (LineEnd lineEnd in lineEnds)
                     {
-                        lineEnd.connected = false;
+                        if (lineEnd._lineColor == lr.GetComponent<LineShake>().lineColor)
+                        {
+                            lineEnd.connected = false;
+                        }
+                    }
+
+                    StopAllCoroutines();
+                }
+                else
+                {
+                    _lr.GetComponent<LineShake>().points.Clear();
+                    _lr.positionCount = 0;
+
+                    foreach (LineEnd lineEnd in lineEnds)
+                    {
+                        if (lineEnd._lineColor == _lr.GetComponent<LineShake>().lineColor)
+                        {
+                            lineEnd.connected = false;
+                        }
                     }
                 }
+
+
             }
         }
     }

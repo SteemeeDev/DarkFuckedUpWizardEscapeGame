@@ -9,6 +9,9 @@ public class BookCirclePiece : MonoBehaviour
     public bool activated = false;
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public SpriteRenderer spriteRenderer;
+
+    [SerializeField, ColorUsage(false, true)] Color pressedColor;
+
     public Color startCol;
     Vector3 startPos;
 
@@ -16,7 +19,7 @@ public class BookCirclePiece : MonoBehaviour
     private void Start()
     {
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
-        startCol = skinnedMeshRenderer.material.color;
+        startCol = skinnedMeshRenderer.material.GetColor("Color");
         startPos = transform.parent.localPosition;
 
       //  Debug.Log(spriteRenderer.gameObject.name);
@@ -25,13 +28,14 @@ public class BookCirclePiece : MonoBehaviour
     {
         if (activated)
         {
-            spriteRenderer.color = Color.black; 
+            Debug.Log(spriteRenderer.material);
+            spriteRenderer.material.SetColor("_BaseColor", Color.black); 
             StartCoroutine(pressAnim(0.3f));
         }
 
         else
         {
-            spriteRenderer.color = Color.blue * 0.9f;
+            spriteRenderer.material.SetColor("_BaseColor", pressedColor);
             StartCoroutine(pressAnim(0.3f));
         }
         

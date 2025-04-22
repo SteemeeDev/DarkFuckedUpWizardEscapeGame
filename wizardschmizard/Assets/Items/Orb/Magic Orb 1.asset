@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16d5b5ad8f3efd8459df1f05eb48d11d, type: 3}
-  m_Name: MagicOrb
+  m_Name: Magic Orb 1
   m_EditorClassIdentifier: 
   renderObject: {fileID: 1881545113203295888, guid: 3748b2723b9bdc34eb9c950c45845de8,
     type: 3}

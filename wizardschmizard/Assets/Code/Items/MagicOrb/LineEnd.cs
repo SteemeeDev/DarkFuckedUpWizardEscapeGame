@@ -6,7 +6,8 @@ public class LineEnd : MonoBehaviour
     {
         Blue,
         Green,
-        Purple
+        Purple,
+        Gray
     }
 
     public LineColor _lineColor;
