@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d5b5ad8f3efd8459df1f05eb48d11d, type: 3}
   m_Name: OpenBook
   m_EditorClassIdentifier: 
-  renderObject: {fileID: 5429533255492434175, guid: c3a80fcfbea971241b7dd06ff98c8dd1,
+  renderObject: {fileID: 7349979843454809877, guid: f50d0417c71e323488fce57e075e1890,
     type: 3}
   sprite: {fileID: 21300000, guid: 6f6fafaf60e7fb44ea71d997adc4dfd1, type: 3}

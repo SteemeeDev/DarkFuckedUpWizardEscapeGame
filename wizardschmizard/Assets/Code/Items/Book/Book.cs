@@ -125,6 +125,6 @@ public class Book : MonoBehaviour
         inventoryManager.AddItem(openBookItem);
         inventoryManager.ShowObject(openBookItem);
 
-        inventoryManager.shownItem.transform.rotation = Quaternion.Euler(90, 90, -90);
+        inventoryManager.shownItem.transform.rotation = rot;
     }
 }
