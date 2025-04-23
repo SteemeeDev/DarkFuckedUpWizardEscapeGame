@@ -19,7 +19,7 @@ public class BookCirclePiece : MonoBehaviour
     private void Start()
     {
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
-        startCol = skinnedMeshRenderer.material.GetColor("Color");
+        startCol = skinnedMeshRenderer.material.color;
         startPos = transform.parent.localPosition;
 
       //  Debug.Log(spriteRenderer.gameObject.name);

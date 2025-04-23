@@ -119,12 +119,11 @@ public class Book : MonoBehaviour
             transform.rotation = Quaternion.Lerp(currentRot, startRot, t);
             yield return null;
         }
-        Quaternion rot = transform.rotation;
 
         inventoryManager.RemoveItem(closedBookItem);
         inventoryManager.AddItem(openBookItem);
         inventoryManager.ShowObject(openBookItem);
 
-        inventoryManager.shownItem.transform.rotation = rot;
+        inventoryManager.shownItem.transform.rotation = Quaternion.Euler(90, 180, 0);
     }
 }
