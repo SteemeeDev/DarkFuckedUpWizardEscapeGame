@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d5b5ad8f3efd8459df1f05eb48d11d, type: 3}
   m_Name: Magic Orb 2
   m_EditorClassIdentifier: 
-  renderObject: {fileID: 1881545113203295888, guid: 132b5829f220bc94d80dbf5da3f7a78f,
+  renderObject: {fileID: 1881545113203295888, guid: 3748b2723b9bdc34eb9c950c45845de8,
     type: 3}
   sprite: {fileID: 21300000, guid: e48988314754eea4d9dc331bca0c6013, type: 3}
   dialogue: 

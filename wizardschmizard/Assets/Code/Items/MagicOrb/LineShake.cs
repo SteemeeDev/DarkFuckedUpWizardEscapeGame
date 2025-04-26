@@ -8,6 +8,7 @@ public class LineShake : MonoBehaviour
     LineRenderer lineRenderer;
     [SerializeField] DrawOnSphere DrawOnSphere;
     [SerializeField] float shakeMagnitude = 0.015f;
+    [SerializeField] bool shake;
     public LineEnd.LineColor lineColor;
 
     private void Start()
@@ -22,19 +23,31 @@ public class LineShake : MonoBehaviour
     {
         if (points.Count > 0)
         {
-            lineRenderer.positionCount = points.Count;
+            if (points.Count != lineRenderer.positionCount) lineRenderer.positionCount = points.Count;
 
-            for (int i = 0; i < lineRenderer.positionCount; i++)
+            if (shake)
             {
-                Vector3 randomPos = points[i] +
-                    new Vector3(
-                        Random.Range(-shakeMagnitude, shakeMagnitude),
-                        Random.Range(-shakeMagnitude, shakeMagnitude),
-                        Random.Range(-shakeMagnitude, shakeMagnitude)
-                    );
+                for (int i = 0; i < lineRenderer.positionCount; i++)
+                {
+                    Vector3 randomPos = points[i] +
+                        new Vector3(
+                            Random.Range(-shakeMagnitude, shakeMagnitude),
+                            Random.Range(-shakeMagnitude, shakeMagnitude),
+                            Random.Range(-shakeMagnitude, shakeMagnitude)
+                        );
 
-                lineRenderer.SetPosition(i, randomPos);
+                    lineRenderer.SetPosition(i, randomPos);
+                }
             }
+            else
+            {
+                for (int i = 0; i < lineRenderer.positionCount; i++)
+                {
+                    Vector3 fixedPos = points[i];
+                    lineRenderer.SetPosition(i, fixedPos);
+                }
+            }
+
         }
     }
 }

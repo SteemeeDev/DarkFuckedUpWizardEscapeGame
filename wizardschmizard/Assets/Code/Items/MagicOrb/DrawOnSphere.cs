@@ -46,7 +46,7 @@ public class DrawOnSphere : MonoBehaviour
                 LineEnd hitLineEnd = hit.transform.GetComponent<LineEnd>();
                 if (hitLineEnd != null)
                 {
-                    StartCoroutine(DrawLine(lineRenderers[(int)hitLineEnd._lineColor]));
+                    StartCoroutine(DrawLine(lineRenderers[(int)hitLineEnd._lineColor], true, Mathf.Infinity));
 
                     foreach (LineEnd lineEnd in lineEnds)
                     {
@@ -60,6 +60,34 @@ public class DrawOnSphere : MonoBehaviour
                             lineEnd.connected = false;
                         }
                     }
+                }
+                else
+                {
+                    foreach (LineRenderer lr in lineRenderers)
+                    {
+
+                        LineShake lineShake = lr.GetComponent<LineShake>();
+
+                        if (lineShake == null ||
+                            lineShake.points.Count <= 0 ||
+                            lineShake.lineColor == LineEnd.LineColor.Gray){
+                            continue;
+                        }
+     
+
+                        float pointMoveDelta =
+                            (transform.TransformPoint(lineShake.points.ElementAt(lineShake.points.Count - 1))
+                            - (hit.point + hit.normal * 0.01f)).magnitude;
+
+
+                        if (pointMoveDelta <= maxPointDistance)
+                        {
+                            Debug.Log(pointMoveDelta);
+                            StartCoroutine(DrawLine(lr, false, pointMoveDelta * 1.2f));
+                        }
+                            
+                    }
+
                 }
             }
 
@@ -87,33 +115,25 @@ public class DrawOnSphere : MonoBehaviour
         }
     }
 
-    IEnumerator DrawLine(LineRenderer lr)
+    IEnumerator DrawLine(LineRenderer lr, bool shouldClear, float pointMoveDelta)
     {
         // Componont that handles storing the position data
         LineShake lineShake = lr.transform.GetComponent<LineShake>();
 
-        // How much the point we are trying to place has moved
-        float pointMoveDelta = Mathf.Infinity;
-
-        bool firstRun = true;
+        if (shouldClear)
+        {
+            lineShake.points.Clear();
+        }
 
         while (Physics.Raycast(itemCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
         {
-            if (firstRun)
+            if (lineShake.points.Count > 0)
             {
-                lineShake.points.Clear();
-                firstRun = false;
+                pointMoveDelta =
+                    (transform.TransformPoint(lineShake.points.ElementAt(lineShake.points.Count - 1))
+                    - (hit.point + hit.normal * 0.01f)).magnitude;
             }
-            else
-            {
-                if (lineShake.points.Count > 0)
-                {
-                    pointMoveDelta =
-                        (transform.TransformPoint(lineShake.points.ElementAt(lineShake.points.Count - 1))
-                        - (hit.point + hit.normal * 0.01f)).magnitude;
-                }
-            }
-            
+
             LineEnd _lineEnd = hit.transform.GetComponent<LineEnd>();
             if (_lineEnd != null)
             {
@@ -135,7 +155,7 @@ public class DrawOnSphere : MonoBehaviour
                 // TODO: Consider if we should always run this top statement
                 if(pointMoveDelta > maxPointDistance && lineShake.points.Count > 0)
                 {
-                    Debug.LogWarning("Mouse moved too fast!");
+                 //   Debug.LogWarning("Mouse moved too fast!");
 
                     Vector2 prevPointScreenPos = itemCam.WorldToScreenPoint(transform.TransformPoint(lineShake.points.ElementAt(lineShake.points.Count - 1)));
                     Vector2 currrentPointScreenPos = itemCam.WorldToScreenPoint(hit.point + hit.normal * 0.01f);
@@ -143,7 +163,7 @@ public class DrawOnSphere : MonoBehaviour
                     Vector2 mouseLerpPos;
 
                     float lerpPoints = (int)(pointMoveDelta / (minPointDistance));
-                    Debug.Log($"Placing {lerpPoints} points");
+                 //   Debug.Log($"Placing {lerpPoints} points");
 
                     for (int i = 0; i <= lerpPoints; i++)
                     {
@@ -152,7 +172,6 @@ public class DrawOnSphere : MonoBehaviour
                         Debug.DrawRay(itemCam.ScreenPointToRay(mouseLerpPos).origin, itemCam.ScreenPointToRay(mouseLerpPos).direction, Color.blue, 20);
                         if (Physics.Raycast(itemCam.ScreenPointToRay(mouseLerpPos), out RaycastHit _hit))
                         {
-                            lr.positionCount = lineShake.points.Count;
                             lineShake.points.Add(transform.InverseTransformPoint(_hit.point + _hit.normal * 0.01f));
 
                             CheckOverlap((_hit.point + _hit.normal * 0.01f), lr);
@@ -162,14 +181,14 @@ public class DrawOnSphere : MonoBehaviour
                 }
                 else
                 {
-                    lr.positionCount = lineShake.points.Count;
                     lineShake.points.Add(transform.InverseTransformPoint(hit.point + hit.normal * 0.01f));
+
                     CheckOverlap((hit.point + hit.normal * 0.01f), lr);
                 }
 
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
        
     }
@@ -207,6 +226,7 @@ public class DrawOnSphere : MonoBehaviour
             {
                 if (_lr.GetComponent<LineShake>().lineColor == LineEnd.LineColor.Gray)
                 {
+                   // Debug.Log("CLEARING " + lr.name + " CAUSE: point at " + point);
                     lr.GetComponent<LineShake>().points.Clear();
                     lr.positionCount = 0;
 
@@ -222,6 +242,7 @@ public class DrawOnSphere : MonoBehaviour
                 }
                 else
                 {
+                    //Debug.Log("CLEARING " + _lr.name);
                     _lr.GetComponent<LineShake>().points.Clear();
                     _lr.positionCount = 0;
 
