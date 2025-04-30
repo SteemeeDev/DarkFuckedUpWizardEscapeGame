@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class LineShake : MonoBehaviour
 {
-    LineRenderer lineRenderer;
     [SerializeField] DrawOnSphere DrawOnSphere;
     [SerializeField] float shakeMagnitude = 0.015f;
     [SerializeField] bool shake;
     public LineEnd.LineColor lineColor;
+    public LineRenderer lineRenderer;
 
     private void Start()
     {

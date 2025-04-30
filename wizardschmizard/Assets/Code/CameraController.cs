@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform[] lookObjects;
     [SerializeField] Transform downObject;
+    [SerializeField] InventoryManager inventory;
     bool lookingDown = false;
     [SerializeField] float turnSpeed = 800f;
     [SerializeField] float turnBufferTime = 0.2f;
@@ -92,17 +93,27 @@ public class CameraController : MonoBehaviour
         {
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 100, lookObjectLayer))
             {
-                if (hit.transform.GetComponent<LookObj>() != null)
+                if (hit.transform.GetComponent<LookObj>() != null && inventory.shownItem == null)
                 {
-                    lookObject = null;
+                     lookObject = null;
 
                      transform.position = hit.transform.GetComponent<LookObj>().CameraPos.position;
                      transform.rotation = hit.transform.GetComponent<LookObj>().CameraPos.rotation;
+
+                    if (hit.transform.GetComponent<MixingManager>() != null)
+                    {
+                        hit.transform.GetComponent<MixingManager>().active = true;
+                    }
                 }
             }
         }
 
         if (lookObject == null) return;
+
+        if (hit.transform != null && hit.transform.GetComponent<MixingManager>() != null)
+        {
+            hit.transform.GetComponent<MixingManager>().active = false;
+        }
 
         transform.rotation =
         Quaternion.RotateTowards(transform.rotation,

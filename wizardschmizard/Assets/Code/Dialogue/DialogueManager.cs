@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,23 +16,50 @@ public class DialogueManager : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] AudioClip[] audios;
 
+    RectTransform _rectTransform;
+
     private void Start()
     {
+        _rectTransform = GetComponent<RectTransform>();
         audioSource = GetComponent<AudioSource>();  
     }
 
-
-    public IEnumerator ReadDialogue(string dialogueObj)
+    [ContextMenu("Read Dialogue")]
+    void grr()
     {
+        StopAllCoroutines();
+        StartCoroutine(ReadDialogue("This is my FAVORITE lantern, it has been with me for generations... ", 1));
+    }
+
+    bool userSkipped = false;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            userSkipped = true;
+        }
+    }
+
+    public IEnumerator ReadDialogue(string dialogueObj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         foreach (GameObject element in textBoxElements)
         {
             element.SetActive(true);
         }
 
+        StartCoroutine(MoveBox(3.0f, -350, 0));
+
         dialogueText.enabled = true;
         dialogueText.text = "";
+
+        userSkipped = false;
+
         for (int i = 0; i < dialogueObj.Length; i++)
         {
+
+
             bool playAudio = false;
             switch (char.ToLower(dialogueObj[i]))
             {
@@ -55,23 +83,51 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
 
-            if (playAudio)
+            dialogueText.text += dialogueObj[i];
+
+            if (!userSkipped)
             {
-                audioSource.pitch = Random.Range(0.75f, 1.15f);
-                audioSource.volume = Random.Range(0.5f, 1f);
-                audioSource.PlayOneShot(audios[0]);
+                if (playAudio)
+                {
+                    audioSource.pitch = UnityEngine.Random.Range(0.75f, 1.15f);
+                    audioSource.volume = 0;// Random.Range(0.5f, 1f);
+                    audioSource.PlayOneShot(audios[0]);
+                }
+                yield return new WaitForSeconds(1.0f / textSpeed);
             }
 
-            dialogueText.text += dialogueObj[i];
-            yield return new WaitForSeconds(1.0f/textSpeed);
         }
 
-        yield return new WaitForSeconds(5);
+        userSkipped = false;
+        float elapsed = 0;
+
+        while (true)
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed > ((float)dialogueObj.Length/2.0f)*0.15f || userSkipped) break;
+            yield return null;
+        }
+
+        yield return StartCoroutine(MoveBox(1.0f, 0.0f, -350.0f));
 
         foreach (GameObject element in textBoxElements)
         {
-            element.SetActive(true);
+            element.SetActive(false);
         }
         dialogueText.enabled = false;
+    }
+
+    IEnumerator MoveBox(float moveTime, float startY, float targetY)
+    {
+        float elapsed = 0;
+        while (elapsed < moveTime)
+        {
+            float t = elapsed / moveTime;
+            elapsed += Time.deltaTime;
+
+            transform.position = new Vector3(transform.position.x, Mathf.Lerp(startY, targetY, 1 - Mathf.Pow(1 - t, 5)), 0);
+
+            yield return null;
+        }
     }
 }

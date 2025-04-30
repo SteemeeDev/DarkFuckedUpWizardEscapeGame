@@ -28,7 +28,7 @@ public class DrawOnSphere : MonoBehaviour
     InventoryManager inventoryManager;
     [SerializeField] InvItem NextItem;
 
-
+    Coroutine drawer;
     private void Awake()
     {
         lineEnds = transform.GetComponentsInChildren<LineEnd>();
@@ -46,7 +46,7 @@ public class DrawOnSphere : MonoBehaviour
                 LineEnd hitLineEnd = hit.transform.GetComponent<LineEnd>();
                 if (hitLineEnd != null)
                 {
-                    StartCoroutine(DrawLine(lineRenderers[(int)hitLineEnd._lineColor], true, Mathf.Infinity));
+                    drawer = StartCoroutine(DrawLine(lineRenderers[(int)hitLineEnd._lineColor], true, Mathf.Infinity));
 
                     foreach (LineEnd lineEnd in lineEnds)
                     {
@@ -83,7 +83,7 @@ public class DrawOnSphere : MonoBehaviour
                         if (pointMoveDelta <= maxPointDistance)
                         {
                             Debug.Log(pointMoveDelta);
-                            StartCoroutine(DrawLine(lr, false, pointMoveDelta * 1.2f));
+                            drawer = StartCoroutine(DrawLine(lr, false, pointMoveDelta * 1.2f));
                         }
                             
                     }
@@ -93,7 +93,7 @@ public class DrawOnSphere : MonoBehaviour
 
         }
         else if (Input.GetMouseButtonUp(0)) {
-            StopAllCoroutines();
+            StopCoroutine(drawer);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -143,7 +143,8 @@ public class DrawOnSphere : MonoBehaviour
                 }
                 else
                 {
-                    StopAllCoroutines();
+                    StopCoroutine(drawer);
+                    StartCoroutine(ClearLine(lineShake, 1f, 0.25f));
                 }
             }
 
@@ -193,19 +194,24 @@ public class DrawOnSphere : MonoBehaviour
        
     }
 
-    float DistanceToClosestPoint(List<Vector3> pointList, Vector3 targetPoint)
+    (float, int) DistanceToClosestPoint(List<Vector3> pointList, Vector3 targetPoint)
     {
         float distance = Mathf.Infinity;
+        int index = int.MaxValue;
 
         for (int i = pointList.Count - 1; i >= 0; i--)
         {
             float pointDistance = Vector3.Distance(pointList[i], targetPoint);
-          //  Debug.Log(pointDistance);
-            if (pointDistance < distance) distance = pointDistance;
+            //  Debug.Log(pointDistance);
+            if (pointDistance < distance)
+            {
+                distance = pointDistance;
+                index = i;
+            }
         }
 
 
-        return distance;
+        return (distance, index);
     }
 
     void CheckOverlap(Vector3 point, LineRenderer lr)
@@ -214,21 +220,22 @@ public class DrawOnSphere : MonoBehaviour
         {
             LineRenderer _lr = lineRenderers[i];
             if (_lr == lr ) continue;
-            
+            LineShake line = _lr.GetComponent<LineShake>();
 
-            float closestPoint =
-                DistanceToClosestPoint(_lr.GetComponent<LineShake>().points,
-            transform.InverseTransformPoint(point));
+            (float, int) closestPoint = DistanceToClosestPoint(
+                line.points,
+                transform.InverseTransformPoint(point));
 
         //    Debug.Log("Distance to " + _lr.transform.name + ": \n" + schmistance);
 
-            if (closestPoint < minOverlapDistance)
+            if (closestPoint.Item1 < minOverlapDistance)
             {
-                if (_lr.GetComponent<LineShake>().lineColor == LineEnd.LineColor.Gray)
+                if (line.lineColor == LineEnd.LineColor.Gray)
                 {
                    // Debug.Log("CLEARING " + lr.name + " CAUSE: point at " + point);
-                    lr.GetComponent<LineShake>().points.Clear();
-                    lr.positionCount = 0;
+                   // lr.GetComponent<LineShake>().points.Clear();
+                   // lr.positionCount = 0;
+                    StartCoroutine(ClearLine(lr.GetComponent<LineShake>(), 1.0f, 0.25f));
 
                     foreach (LineEnd lineEnd in lineEnds)
                     {
@@ -238,17 +245,18 @@ public class DrawOnSphere : MonoBehaviour
                         }
                     }
 
-                    StopAllCoroutines();
+                    StopCoroutine(drawer);
                 }
                 else
                 {
                     //Debug.Log("CLEARING " + _lr.name);
-                    _lr.GetComponent<LineShake>().points.Clear();
+                    line.points.Clear();
                     _lr.positionCount = 0;
+
 
                     foreach (LineEnd lineEnd in lineEnds)
                     {
-                        if (lineEnd._lineColor == _lr.GetComponent<LineShake>().lineColor)
+                        if (lineEnd._lineColor == line.lineColor)
                         {
                             lineEnd.connected = false;
                         }
@@ -258,6 +266,22 @@ public class DrawOnSphere : MonoBehaviour
 
             }
         }
+    }
+
+    IEnumerator ClearLine(LineShake line, float time, float waitingTime)
+    {
+        float stepTime =  time / (float)line.points.Count;
+
+        yield return new WaitForSeconds(waitingTime);
+
+        while (line.points.Count > 0)
+        {
+            line.points.RemoveAt(line.points.Count - 1);
+            yield return new WaitForSeconds(stepTime - Time.deltaTime);
+        }
+
+        line.points.Clear();
+        line.lineRenderer.positionCount = 0;
     }
 
     bool PuzzleFinished()

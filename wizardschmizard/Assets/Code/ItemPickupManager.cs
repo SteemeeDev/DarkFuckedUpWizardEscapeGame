@@ -32,7 +32,7 @@ public class ItemPickupManager : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1) && hitWorldItem != null)
             {
-                if (hitWorldItem.invItem.dialogue != null) StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue));
+                if (hitWorldItem.invItem.dialogue != null) StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue, 0));
             }
         }
 
@@ -50,7 +50,7 @@ public class ItemPickupManager : MonoBehaviour
                 if (hitWorldItem.invItem.dialogue != null)
                 {
                     dialogueManager.StopAllCoroutines();
-                    StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue));
+                    StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue, 0));
                 }
             } 
 
