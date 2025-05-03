@@ -32,7 +32,11 @@ public class ItemPickupManager : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1) && hitWorldItem != null)
             {
-                if (hitWorldItem.invItem.dialogue != null) StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue, 0));
+                if (hitWorldItem.invItem.dialogue != null)
+                {
+                    if (dialogueManager.dialogueWriter != null) StopCoroutine(dialogueManager.dialogueWriter);
+                    dialogueManager.dialogueWriter = StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue, 4, 0));
+                }
             }
         }
 
@@ -49,8 +53,8 @@ public class ItemPickupManager : MonoBehaviour
             {
                 if (hitWorldItem.invItem.dialogue != null)
                 {
-                    dialogueManager.StopAllCoroutines();
-                    StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue, 0));
+                    if (dialogueManager.dialogueWriter != null) StopCoroutine(dialogueManager.dialogueWriter);
+                    dialogueManager.dialogueWriter = StartCoroutine(dialogueManager.ReadDialogue(hitWorldItem.invItem.dialogue, 4, 0));
                 }
             } 
 

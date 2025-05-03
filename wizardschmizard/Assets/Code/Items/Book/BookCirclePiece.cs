@@ -22,38 +22,28 @@ public class BookCirclePiece : MonoBehaviour
         startCol = skinnedMeshRenderer.material.color;
         startPos = transform.parent.localPosition;
 
-      //  Debug.Log(spriteRenderer.gameObject.name);
+        //  Debug.Log(spriteRenderer.gameObject.name);
     }
     public void Click()
     {
-        if (activated)
-        {
-            Debug.Log(spriteRenderer.material);
-            spriteRenderer.material.SetColor("_BaseColor", Color.black); 
-            StartCoroutine(pressAnim(0.3f));
-        }
-
-        else
-        {
-            spriteRenderer.material.SetColor("_BaseColor", pressedColor);
-            StartCoroutine(pressAnim(0.3f));
-        }
-        
-        activated = !activated;
+        StartCoroutine(pressAnim(0.2f));
     }
 
     IEnumerator pressAnim(float animTime)
     {
+        activated = !activated;
+
         float elapsed = 0;
         while (elapsed < animTime)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / animTime;
-            if (!activated) t *= -1;
-            transform.parent.localPosition = startPos + transform.forward * (t * 0.01f);
+            if (!activated) t *= -1.0f;
+            transform.parent.localPosition = startPos + transform.parent.forward * (t * 0.01f);
+            spriteRenderer.material.SetColor("_BaseColor", Color.Lerp(pressedColor, Color.black, activated ? 1.0f - Mathf.Abs(t) : Mathf.Abs(t)));
             yield return null;
         }
 
-       // if (!activated) transform.localPosition = startPos;
+        // if (!activated) transform.localPosition = startPos;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,13 +16,14 @@ public class MixingManager : MonoBehaviour
     [SerializeField] Image ingredientImage;
     [SerializeField] CauldronLiquid liquid;
 
-    public List<MixingIngredient> ingredients = new();
-    public int maxIngredients = 10;
+    public List<MixingIngredient.Ingredient> ingredients = new();
 
     const int ingredientLayer = 1 << 16;
     RaycastHit hit;
 
     Camera mainCam;
+
+    [SerializeField] MixingIngredient.Ingredient[] correctOrder;
     private void Start()
     {
         mainCam = Camera.main;
@@ -29,6 +31,8 @@ public class MixingManager : MonoBehaviour
 
     bool dragging = false;
     MixingIngredient ingredient;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -39,7 +43,7 @@ public class MixingManager : MonoBehaviour
             MenuInvItem menuInvItem = item.GetComponent<MenuInvItem>();
             if (menuInvItem.invItem == bookItem)
             {
-               // StartCoroutine(dialogueManger.ReadDialogue("You place down the book...", 0));
+                StartCoroutine(dialogueManger.ReadDialogue("You place down the book...", -1, 0));
                 inventory.RemoveItem(bookItem);
                 bookOnTable.SetActive(true);
                 return;
@@ -59,29 +63,58 @@ public class MixingManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            dragging = false;
-            ingredientImage.enabled = false;
-
-            if (!(ingredients.Count >= maxIngredients))
+            if (dragging)
             {
                 if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 100, ingredientLayer))
                 {
                     if (hit.transform != null && hit.transform.CompareTag("MixingPot") && ingredient != null)
                     {
                         Debug.Log($"Added {ingredient.name} to the pot!");
-                        ingredients.Add(ingredient);
-                        liquid.fill = (float)ingredients.Count / (float)maxIngredients;
+                        ingredients.Add(ingredient._ingredient);
+                        liquid.fill = (float)ingredients.Count / (float)correctOrder.Length;
                         liquid.UpdateLiquid();
+
+                        if (ingredients.Count >= correctOrder.Length)
+                        {
+                            bool correct = CheckPuzzle();
+                            if (!correct)
+                            {
+                                StartCoroutine(liquid.Fail(0.5f));
+                                ingredients.Clear();
+                            }
+                            else
+                            {
+                                StartCoroutine(liquid.Fail(0.5f));
+                                ingredients.Clear();
+                                Debug.Log("Concrats!");
+                            }
+                        }
                     }
                 }
             }
+
+            dragging = false;
+            ingredientImage.enabled = false;
         }
 
         if (dragging)
         {
             ingredientImage.enabled = true;
             ingredientImage.sprite = ingredient._sprite;
+            ingredientImage.color = ingredient.GetComponent<SpriteRenderer>().color;
             ingredientImage.transform.position = Input.mousePosition;
         }
+    }
+
+    bool CheckPuzzle()
+    {
+        bool _correct = true;
+
+        for (int i = 0; i < correctOrder.Length; i++)
+        {
+            if (correctOrder[i] != ingredients.ElementAt(i)) _correct = false;
+        }
+
+        return _correct;
     }
 }

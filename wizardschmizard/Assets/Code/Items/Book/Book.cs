@@ -106,6 +106,8 @@ public class Book : MonoBehaviour
 
     IEnumerator FinishTurn()
     {
+        yield return new WaitForSeconds(.5f);
+
         float elapsed = 0;
         float time = 1f;
 

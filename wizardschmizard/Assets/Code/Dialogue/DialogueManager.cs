@@ -8,27 +8,20 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] float textSpeed = 20;
-
     [SerializeField] GameObject[] textBoxElements;
-
     [SerializeField] TMP_Text dialogueText;
-
-    AudioSource audioSource;
     [SerializeField] AudioClip[] audios;
 
+    AudioSource audioSource;
     RectTransform _rectTransform;
+
+    public Coroutine dialogueWriter;
+    Coroutine boxMover;
 
     private void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
         audioSource = GetComponent<AudioSource>();  
-    }
-
-    [ContextMenu("Read Dialogue")]
-    void grr()
-    {
-        StopAllCoroutines();
-        StartCoroutine(ReadDialogue("This is my FAVORITE lantern, it has been with me for generations... ", 1));
     }
 
     bool userSkipped = false;
@@ -40,7 +33,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ReadDialogue(string dialogueObj, float delay)
+    public IEnumerator ReadDialogue(string dialogueObj, float lastingTime, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -49,7 +42,7 @@ public class DialogueManager : MonoBehaviour
             element.SetActive(true);
         }
 
-        StartCoroutine(MoveBox(3.0f, -350, 0));
+        boxMover = StartCoroutine(MoveBox(3.0f, 0));
 
         dialogueText.enabled = true;
         dialogueText.text = "";
@@ -98,17 +91,23 @@ public class DialogueManager : MonoBehaviour
 
         }
 
+
         userSkipped = false;
         float elapsed = 0;
 
         while (true)
         {
             elapsed += Time.deltaTime;
-            if (elapsed > ((float)dialogueObj.Length/2.0f)*0.15f || userSkipped) break;
+
+            // You can set lastingTime to -1 to have dialogue appear indefinetely
+            if (lastingTime > 0 && elapsed > lastingTime) break;
+            if (userSkipped) break;
+
+
             yield return null;
         }
 
-        yield return StartCoroutine(MoveBox(1.0f, 0.0f, -350.0f));
+        yield return boxMover = StartCoroutine(MoveBox(1.0f, -350.0f));
 
         foreach (GameObject element in textBoxElements)
         {
@@ -117,8 +116,9 @@ public class DialogueManager : MonoBehaviour
         dialogueText.enabled = false;
     }
 
-    IEnumerator MoveBox(float moveTime, float startY, float targetY)
+    IEnumerator MoveBox(float moveTime, float targetY)
     {
+        float startY = transform.position.y;
         float elapsed = 0;
         while (elapsed < moveTime)
         {
