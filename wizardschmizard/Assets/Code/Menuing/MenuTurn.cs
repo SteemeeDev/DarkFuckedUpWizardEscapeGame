@@ -1,6 +1,8 @@
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuTurn : MonoBehaviour, IPointerEnterHandler
 {
@@ -8,6 +10,15 @@ public class MenuTurn : MonoBehaviour, IPointerEnterHandler
     [SerializeField] bool down;
     [SerializeField] bool up;
     [SerializeField] CameraController CamController;
+
+    Image img;
+    Color startColor;
+
+    private void Start()
+    {
+        img = GetComponent<Image>();
+        startColor = img.color;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -17,6 +28,18 @@ public class MenuTurn : MonoBehaviour, IPointerEnterHandler
         else
         {
             CamController.Turn(false, down);
+        }
+    }
+
+    private void Update()
+    {
+        if (CamController.lookingDown)
+        {
+            img.color = up ? startColor : new Color(0, 0, 0, 0);
+        }
+        else if (!CamController.lookingDown)
+        {
+            img.color = up ? new Color(0, 0, 0, 0) : startColor;
         }
     }
 }

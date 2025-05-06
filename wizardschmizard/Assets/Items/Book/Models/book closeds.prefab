@@ -222,7 +222,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7125586159699465544}
   pressedColor: {r: 0.2557096, g: 0, b: 2.6082377, a: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 4
+  index: 3
 --- !u!65 &8659761087765158517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1808250056357330812}
   pressedColor: {r: 0.2557096, g: 0, b: 2.6082377, a: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 1
+  index: 6
 --- !u!65 &6975171414622592364
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6586741349212731075}
   pressedColor: {r: 0.2557096, g: 0, b: 2.6082377, a: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 3
+  index: 8
 --- !u!65 &6831523938090391028
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -939,7 +939,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1803390892108577138}
   pressedColor: {r: 0.2557096, g: 0, b: 2.6082377, a: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 8
+  index: 1
 --- !u!65 &3445821648667678561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1312,7 +1312,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5258605673850991531}
   pressedColor: {r: 0.2557096, g: 0, b: 2.6082377, a: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 6
+  index: 2
 --- !u!65 &5430915660151585704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1704,7 +1704,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8986986420209358051}
   pressedColor: {r: 0.2557096, g: 0, b: 2.6082377, a: 0}
   startCol: {r: 0, g: 0, b: 0, a: 0}
-  index: 2
+  index: 4
 --- !u!65 &3404841857877535799
 BoxCollider:
   m_ObjectHideFlags: 0

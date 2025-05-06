@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform[] lookObjects;
     [SerializeField] Transform downObject;
     [SerializeField] InventoryManager inventory;
-    bool lookingDown = false;
+    public bool lookingDown = false;
     [SerializeField] float turnSpeed = 800f;
     [SerializeField] float turnBufferTime = 0.2f;
     [SerializeField] LayerMask lookObjectLayer = 1 << 14;

@@ -351,6 +351,7 @@ MonoBehaviour:
   shakeMagnitude: 0.01
   shake: 1
   lineColor: 1
+  lineRenderer: {fileID: 0}
   points: []
 --- !u!1 &4126161015967191401
 GameObject:
@@ -503,6 +504,7 @@ MonoBehaviour:
   shakeMagnitude: 0.005
   shake: 0
   lineColor: 3
+  lineRenderer: {fileID: 0}
   points: []
 --- !u!1 &4282719601441355371
 GameObject:
@@ -929,6 +931,7 @@ MonoBehaviour:
   shakeMagnitude: 0.01
   shake: 1
   lineColor: 2
+  lineRenderer: {fileID: 0}
   points: []
 --- !u!1 &7897428949859095478
 GameObject:
@@ -1081,6 +1084,7 @@ MonoBehaviour:
   shakeMagnitude: 0.01
   shake: 1
   lineColor: 0
+  lineRenderer: {fileID: 0}
   points: []
 --- !u!1 &8212269622867916993
 GameObject:
@@ -1094,6 +1098,7 @@ GameObject:
   - component: {fileID: 5898249267345109887}
   - component: {fileID: 573885712821893662}
   - component: {fileID: 7018101101638959452}
+  - component: {fileID: 6357607289574320363}
   m_Layer: 6
   m_Name: Core
   m_TagString: Untagged
@@ -1187,3 +1192,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6357607289574320363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8212269622867916993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4baac7ff2ace3d499706d1e6c12c727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10

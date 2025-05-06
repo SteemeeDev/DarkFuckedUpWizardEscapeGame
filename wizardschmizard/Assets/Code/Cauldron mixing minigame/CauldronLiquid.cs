@@ -7,6 +7,7 @@ public class CauldronLiquid : MonoBehaviour
 {
     [Range(0, 1.0f)] public float fill;
     [SerializeField] float scale;
+    [SerializeField, HideInInspector] AnimationCurve scaleCurve; // Unused
     [SerializeField] ParticleSystem particles;
 
     Vector3 startPos;
