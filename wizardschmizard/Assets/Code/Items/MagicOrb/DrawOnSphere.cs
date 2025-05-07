@@ -69,8 +69,9 @@ public class DrawOnSphere : MonoBehaviour
                         LineShake lineShake = lr.GetComponent<LineShake>();
 
                         if (lineShake == null ||
-                            lineShake.points.Count <= 0 ||
-                            lineShake.lineColor == LineEnd.LineColor.Gray){
+                            lineShake.points.Count <= 0 /*||
+                            lineShake.lineColor == LineEnd.LineColor.Gray*/)
+                        {
                             continue;
                         }
      

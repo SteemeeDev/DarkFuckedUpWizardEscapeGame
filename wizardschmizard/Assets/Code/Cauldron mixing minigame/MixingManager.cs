@@ -72,7 +72,7 @@ public class MixingManager : MonoBehaviour
                         Debug.Log($"Added {ingredient.name} to the pot!");
                         ingredients.Add(ingredient._ingredient);
                         liquid.fill = (float)ingredients.Count / (float)correctOrder.Length;
-                        liquid.UpdateLiquid();
+                        liquid.UpdateLiquid(ingredient._color);
 
                         if (ingredients.Count >= correctOrder.Length)
                         {

@@ -16,6 +16,7 @@ public class CauldronLiquid : MonoBehaviour
     [SerializeField] Transform topPos;
 
     MeshRenderer _renderer;
+    Color startCol;
 
     private void Awake()
     {
@@ -25,8 +26,7 @@ public class CauldronLiquid : MonoBehaviour
         startScale = transform.localScale;
     }
 
-    [ContextMenu("Update Fill")]
-    public void UpdateLiquid()
+    public void UpdateLiquid(Color color)
     {
         if (_renderer != null) _renderer.enabled = true;
 
@@ -40,6 +40,17 @@ public class CauldronLiquid : MonoBehaviour
             startScale.y,
             startScale.z * scale * (fill + 1)
         );
+
+        _renderer.material.color = Color.Lerp(_renderer.material.color, color, 0.5f);
+
+        _renderer.material.color = new Color(
+            _renderer.material.color.r,
+            _renderer.material.color.g, 
+            _renderer.material.color.b, 
+            0
+            );
+
+        _renderer.material.color += new Color(0, 0, 0, 101.0f/255.0f);
     }
 
     public IEnumerator Fail(float animTime)
@@ -53,12 +64,14 @@ public class CauldronLiquid : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = 1.0f - elapsed / animTime;
             fill = t;
-            UpdateLiquid();
+            UpdateLiquid(startCol);
             yield return null;
         }
 
         if (_renderer != null) _renderer.enabled = false;
         
         particles.Stop();
+
+        _renderer.material.color = startCol;
     }
 }

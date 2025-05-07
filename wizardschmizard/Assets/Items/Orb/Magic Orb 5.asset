@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d5b5ad8f3efd8459df1f05eb48d11d, type: 3}
+  m_Name: Magic Orb 5
+  m_EditorClassIdentifier: 
+  renderObject: {fileID: 1881545113203295888, guid: fec4f0e028496814fb8fac03b1ee4457,
+    type: 3}
+  sprite: {fileID: 21300000, guid: e48988314754eea4d9dc331bca0c6013, type: 3}
+  dialogue: 

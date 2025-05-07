@@ -166,7 +166,7 @@ MonoBehaviour:
   maxPointDistance: 0.06
   minOverlapDistance: 0.017
   lineEnds: []
-  NextItem: {fileID: 0}
+  NextItem: {fileID: 11400000, guid: 26733261f14095f4aa52ab0f461e7935, type: 2}
 --- !u!1 &2038344326120189446
 GameObject:
   m_ObjectHideFlags: 0
