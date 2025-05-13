@@ -95,10 +95,6 @@ public class DrawOnSphere : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0)) {
             StopCoroutine(drawer);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
             if (PuzzleFinished())
             {
                 inventoryManager.RemoveItem(inventoryManager.shownInvItem);
@@ -106,13 +102,6 @@ public class DrawOnSphere : MonoBehaviour
                 inventoryManager.ShowObject(NextItem);
             }
             Debug.Log($"Finished puzzle: {PuzzleFinished()}");
-
-            /*
-            foreach (LineRenderer lineRenderer in lineRenderers)
-            {
-                lineRenderer.GetComponent<LineShake>().points.Clear();
-                lineRenderer.positionCount = 0;
-            }*/
         }
     }
 

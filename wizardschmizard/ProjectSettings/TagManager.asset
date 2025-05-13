@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemCamera
   - MixingPot
+  - MixingStick
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - LookObject
   - 
   - Ingredient
-  - 
+  - Cauldron
   - 
   - 
   - 

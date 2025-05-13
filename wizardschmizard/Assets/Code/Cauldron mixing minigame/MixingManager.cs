@@ -16,9 +16,13 @@ public class MixingManager : MonoBehaviour
     [SerializeField] Image ingredientImage;
     [SerializeField] CauldronLiquid liquid;
 
+    [SerializeField] GameObject Brownie;
+
+
     public List<MixingIngredient.Ingredient> ingredients = new();
 
     const int ingredientLayer = 1 << 16;
+    const int potLayer = 1 << 17;
     RaycastHit hit;
 
     Camera mainCam;
@@ -32,6 +36,7 @@ public class MixingManager : MonoBehaviour
     bool dragging = false;
     MixingIngredient ingredient;
 
+    Coroutine liquidUpdate;
 
     // Update is called once per frame
     void Update()
@@ -54,7 +59,32 @@ public class MixingManager : MonoBehaviour
         {
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 100, ingredientLayer))
             {
-                if (!hit.transform.CompareTag("MixingPot"))
+                if (hit.transform.CompareTag("MixingStick"))
+                {
+                    Animator animator = hit.transform.parent.GetComponent<Animator>();
+                    animator.SetTrigger("Mix");
+
+                    ingredients.Add(MixingIngredient.Ingredient.Mix);
+
+                    if (liquidUpdate != null) StopCoroutine(liquidUpdate);
+                    liquidUpdate = StartCoroutine(liquid.UpdateLiquidSmooth(liquid._renderer.material.color, .45f, (float)ingredients.Count / (float)correctOrder.Length));
+                    if (ingredients.Count >= correctOrder.Length)
+                    {
+                        bool correct = CheckPuzzle();
+                        if (!correct)
+                        {
+                            StartCoroutine(liquid.Fail(0.5f));
+                            ingredients.Clear();
+                        }
+                        else
+                        {
+                            StartCoroutine(liquid.Fail(0.5f));
+                            ingredients.Clear();
+                            GameObject go = Instantiate(Brownie);
+                        }
+                    }
+                }
+                else if (!hit.transform.CompareTag("MixingPot"))
                 {
                     dragging = true;
                     ingredient = hit.transform.GetComponent<MixingIngredient>();
@@ -65,14 +95,17 @@ public class MixingManager : MonoBehaviour
         {
             if (dragging)
             {
-                if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 100, ingredientLayer))
+                if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 100, potLayer))
                 {
-                    if (hit.transform != null && hit.transform.CompareTag("MixingPot") && ingredient != null)
-                    {
+                    if (hit.transform != null && 
+                        ingredient != null && 
+                        ingredients.Count < correctOrder.Length + 1) {
+
                         Debug.Log($"Added {ingredient.name} to the pot!");
                         ingredients.Add(ingredient._ingredient);
-                        liquid.fill = (float)ingredients.Count / (float)correctOrder.Length;
-                        liquid.UpdateLiquid(ingredient._color);
+                        //liquid.fill = (float)ingredients.Count / (float)correctOrder.Length;
+                        if (liquidUpdate != null) StopCoroutine(liquidUpdate);
+                        liquidUpdate = StartCoroutine(liquid.UpdateLiquidSmooth(ingredient._color, .15f, (float)ingredients.Count / (float)correctOrder.Length));
 
                         if (ingredients.Count >= correctOrder.Length)
                         {
@@ -86,7 +119,7 @@ public class MixingManager : MonoBehaviour
                             {
                                 StartCoroutine(liquid.Fail(0.5f));
                                 ingredients.Clear();
-                                Debug.Log("Concrats!");
+                                GameObject go = Instantiate(Brownie);
                             }
                         }
                     }

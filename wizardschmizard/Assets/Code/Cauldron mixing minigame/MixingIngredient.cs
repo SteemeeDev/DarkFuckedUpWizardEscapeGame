@@ -10,7 +10,7 @@ public class MixingIngredient : MonoBehaviour
         Cocoa,
         Sugar,
         Flour,
-        Watuh
+        Mix
     }
 
     
