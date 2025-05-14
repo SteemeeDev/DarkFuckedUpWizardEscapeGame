@@ -6,14 +6,17 @@ public class MixingIngredient : MonoBehaviour
 {
     public enum Ingredient
     {
-        GreenEgg,
-        RedEgg,
-        BlueEgg
+        WizardEggs,
+        Cocoa,
+        Sugar,
+        Flour,
+        Mix
     }
 
     
     public Ingredient _ingredient;
     public Sprite _sprite;
+    [ColorUsage(true, true)] public Color _color;
 
     // Start is called before the first frame update
     void Start()
