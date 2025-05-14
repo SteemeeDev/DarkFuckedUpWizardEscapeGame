@@ -15,7 +15,7 @@ public class DrawOnSphere : MonoBehaviour
     [SerializeField] LineRenderer[] lineRenderers;
     [SerializeField] float minPointDistance;
     [SerializeField] float maxPointDistance;
-    [SerializeField] float minOverlapDistance;
+    [SerializeField] float minOverlapDistance; // Colission check distance
 
     [SerializeField] LineEnd[] lineEnds;
 
@@ -44,6 +44,7 @@ public class DrawOnSphere : MonoBehaviour
             if (Physics.Raycast(itemCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 999))
             {
                 LineEnd hitLineEnd = hit.transform.GetComponent<LineEnd>();
+
                 if (hitLineEnd != null)
                 {
                     drawer = StartCoroutine(DrawLine(lineRenderers[(int)hitLineEnd._lineColor], true, Mathf.Infinity));
@@ -70,8 +71,8 @@ public class DrawOnSphere : MonoBehaviour
 
                         if (lineShake == null ||
                             lineShake.points.Count <= 0 ||
-                            lineShake.lineColor == LineEnd.LineColor.Gray)
-                        {
+                            lineShake.lineColor == LineEnd.LineColor.Gray){
+
                             continue;
                         }
      
@@ -141,7 +142,6 @@ public class DrawOnSphere : MonoBehaviour
             // Check if point has moved enough
             if (pointMoveDelta > minPointDistance)
             {
-                // Debug.Log("PointMoveDelta: " + pointMoveDelta);
 
                 // TODO: Consider if we should always run this top statement
                 if(pointMoveDelta > maxPointDistance && lineShake.points.Count > 0)
@@ -212,19 +212,15 @@ public class DrawOnSphere : MonoBehaviour
             if (_lr == lr ) continue;
             LineShake line = _lr.GetComponent<LineShake>();
 
+            // Float is the distance and int is the index of said point
             (float, int) closestPoint = DistanceToClosestPoint(
                 line.points,
                 transform.InverseTransformPoint(point));
-
-        //    Debug.Log("Distance to " + _lr.transform.name + ": \n" + schmistance);
 
             if (closestPoint.Item1 < minOverlapDistance)
             {
                 if (line.lineColor == LineEnd.LineColor.Gray)
                 {
-                   // Debug.Log("CLEARING " + lr.name + " CAUSE: point at " + point);
-                   // lr.GetComponent<LineShake>().points.Clear();
-                   // lr.positionCount = 0;
                     StartCoroutine(ClearLine(lr.GetComponent<LineShake>(), 1.0f, 0.25f));
 
                     foreach (LineEnd lineEnd in lineEnds)
